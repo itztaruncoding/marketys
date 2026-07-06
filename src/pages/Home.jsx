@@ -7,7 +7,7 @@ import { BlogCard } from "@/components/BlogCard";
 import { deals } from "@/data/deals";
 import { blogs } from "@/data/blogs";
 import { motion } from "framer-motion";
-import { ArrowRight, Star, ExternalLink, Mail, Zap, DollarSign } from "lucide-react";
+import { ArrowRight, Star, ExternalLink, Mail, Zap, DollarSign, Users, Clock, BookOpen, Gift } from "lucide-react";
 import { SiGoogleads, SiCanvas, SiMeta, SiClickup, SiHubspot, SiTiktok, SiPinterest, SiSnapchat, SiYoutube, SiMailchimp, SiBuffer, SiHootsuite, SiGrammarly, SiNotion } from "react-icons/si";
 import { Linkedin } from "lucide-react";
 import heroVideoMov from "@/assets/home_hero_video_2.mov";
@@ -48,47 +48,56 @@ export default function Home() {
     name: "Digital Marketing",
     count: "200+",
     image: "https://www.pagetraffic.in/wp-content/uploads/2022/05/digital-marketing-guide.jpg",
-    dbCategory: "Marketing"
+    dbCategory: "Marketing",
+    desc: "Learn proven strategies to grow your online presence and business."
   }, {
     name: "Affiliate Marketing",
     count: "80+",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1UE_q5YbljtZ5t8oZufk0ksW73ZVByGuW39kDQMckP-jj9-vkwAesMHmo&s=10",
-    dbCategory: "Marketing"
+    dbCategory: "Marketing",
+    desc: "Partner with top brands, drive targeted traffic, and earn commissions."
   }, {
     name: "Advertising",
     count: "120+",
     image: "https://indianmediastudies.com/wp-content/uploads/2023/11/what-is-advertising-copy.jpeg.webp",
-    dbCategory: "Marketing"
+    dbCategory: "Marketing",
+    desc: "Maximize ROI with cross-channel digital advertising networks."
   }, {
     name: "SEO Tools",
     count: "88+",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtJKYGDU5a0eI7jmQg2u3mbfK_2YBM72j1Oufuba7L2sBEttK86vN-BUY&s=10",
-    dbCategory: "SEO Tools"
+    dbCategory: "SEO Tools",
+    desc: "Drive free organic traffic and dominate major search engine lists."
   }, {
     name: "Email Marketing",
     count: "90+",
     image: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=600&auto=format&fit=crop",
-    dbCategory: "Email Marketing"
+    dbCategory: "Email Marketing",
+    desc: "Build lists, automate message flows, and engage customers directly."
   }, {
     name: "AI Marketing",
     count: "100+",
     image: "https://cdn.bap-software.net/2024/11/18163513/p1c.png",
-    dbCategory: "Marketing"
+    dbCategory: "Marketing",
+    desc: "Leverage advanced artificial intelligence to automate marketing tasks."
   }, {
     name: "Web Hosting",
     count: "50+",
     image: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=600&auto=format&fit=crop",
-    dbCategory: "Hosting"
+    dbCategory: "Hosting",
+    desc: "Launch super fast, secure, and highly reliable corporate websites."
   }, {
     name: "Ecommerce",
     count: "70+",
     image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=600&auto=format&fit=crop",
-    dbCategory: "eCommerce"
+    dbCategory: "eCommerce",
+    desc: "Sell physical or digital products globally and scale your online store."
   }, {
     name: "Social Media Tools",
     count: "40+",
     image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=600&auto=format&fit=crop",
-    dbCategory: "Marketing"
+    dbCategory: "Marketing",
+    desc: "Manage social media feeds, schedule posts, and build your brand."
   }];
   const affiliatePrograms = [{
     name: "Amazon Associates",
@@ -224,21 +233,57 @@ export default function Home() {
               }} className="w-full max-w-lg lg:max-w-2xl h-auto object-contain" style={{
                 display: "block"
               }}>{<source src={heroVideoWebm} type="video/webm" />}{<source src={heroVideoMov} type="video/quicktime" />}</video>}</motion.div>}</div>}</div>}</section>}{<section id="categories" className="py-16 bg-muted/20 border-y border-border">{<div className="container mx-auto px-4 md:px-6">{// Highly styled category header
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 border-b border-border/80 pb-6">{<div className="space-y-3">{<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 uppercase tracking-widest border border-blue-100">Browse by Topic</span>}{<h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">Explore Categories</h2>}{<p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">Find exclusive discounts, verified reviews, and top affiliate opportunities tailored to your marketing needs.</p>}</div>}{<Link href="/deals" className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group/all shrink-0 pb-1">View All Categories {<ArrowRight className="w-5 h-5 transition-transform group-hover/all:translate-x-1" />}</Link>}</div>}{// Modern category grid
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">{categories.map((cat, i) => <motion.div initial={{
-              opacity: 0,
-              y: 25
-            }} whileInView={{
-              opacity: 1,
-              y: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              delay: i * 0.05,
-              duration: 0.5
-            }}>{<Link href={`/deals?category=${encodeURIComponent(cat.dbCategory || "All Deals")}`} className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:shadow-xl hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1.5 w-full min-h-[340px]">{// 1. Image container (Upper side)
-                <div className="relative h-52 w-full overflow-hidden border-b border-border/50">{<img src={cat.image} alt={cat.name} className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />}</div>}{// 2. Text Header (Downside)
-                <div className="p-5 flex flex-col justify-between flex-1 gap-2">{<div className="flex items-start justify-between w-full gap-4">{<h3 className="font-bold text-lg text-foreground tracking-tight leading-snug group-hover:text-blue-600 transition-colors">{cat.name}</h3>}{<span className="inline-flex items-center gap-1 px-3 py-1 text-[10px] font-bold uppercase rounded-full bg-blue-50 text-blue-700 border border-blue-100 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 whitespace-nowrap">Explore Now{<ArrowRight className="w-3 h-3" />}</span>}</div>}{<span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{cat.count} Offers</span>}</div>}</Link>}</motion.div>)}</div>}</div>}</section>}{<section className="py-12 bg-card relative overflow-hidden">{<div className="container mx-auto px-4 md:px-6">{<div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 border-b border-border/80 pb-6">{<div className="space-y-3">{<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 uppercase tracking-widest border border-amber-100">Live Offers</span>}{<h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground flex items-center gap-3">Today's Deals{<span className="relative flex h-4 w-4">{<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />}{<span className="relative inline-flex rounded-full h-4 w-4 bg-red-500" />}</span>}</h2>}{<p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">Time-sensitive discounts and exclusive pricing on premium marketing tools, updated hourly.</p>}</div>}{<Link href="/deals" className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group/all shrink-0 pb-1">View All Deals {<ArrowRight className="w-5 h-5 transition-transform group-hover/all:translate-x-1" />}</Link>}</div>}{<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{todaysDeals.map((deal, i) => <DealCard deal={deal} index={i} />)}</div>}</div>}</section>}{<section className="py-12 bg-muted/30 border-y border-border">{<div className="container mx-auto px-4 md:px-6">{<div className="flex items-center justify-between mb-6">{<h2 className="text-3xl md:text-4xl font-black">Trending Offers</h2>}</div>}{<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{[{
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 border-b border-border/80 pb-6">{<div className="space-y-3">{<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 uppercase tracking-widest border border-blue-100">Browse by Topic</span>}{<h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">Explore Categories</h2>}{<p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">Find exclusive discounts, verified reviews, and top affiliate opportunities tailored to your marketing needs.</p>}</div>}{<Link href="/categories" className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group/all shrink-0 pb-1">View All Categories {<ArrowRight className="w-5 h-5 transition-transform group-hover/all:translate-x-1" />}</Link>}</div>}{// Modern category grid
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((cat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.5 }}
+              >
+                <Link
+                  href={`/deals?category=${encodeURIComponent(cat.dbCategory || "All Deals")}`}
+                  className="group flex flex-col rounded-3xl border border-slate-200/80 bg-white overflow-hidden hover:shadow-2xl hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1.5 w-full h-[400px]"
+                >
+                  {/* 1. Image container (Upper side) */}
+                  <div className="relative h-44 w-full overflow-hidden shrink-0">
+                    <img
+                      src={cat.image}
+                      alt={cat.name}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
+                  {/* 2. Card Content (Downside) */}
+                  <div className="p-5 flex flex-col justify-between flex-1">
+                    <div>
+                      {/* Bestseller badge */}
+                      <span className="inline-block bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full w-fit mb-2.5">
+                        Bestseller
+                      </span>
+                      <h3 className="font-extrabold text-xl text-slate-800 tracking-tight leading-snug group-hover:text-blue-600 transition-colors mb-2">
+                        {cat.name}
+                      </h3>
+                      <p className="text-slate-500 text-xs leading-relaxed line-clamp-2">
+                        {cat.desc}
+                      </p>
+                    </div>
+                    {/* Card Footer Row */}
+                    <div className="flex items-center justify-between border-t border-slate-100 pt-4">
+                      <div className="flex items-center gap-1.5 text-slate-500 text-xs font-semibold">
+                        <Gift className="w-4 h-4 text-blue-600 shrink-0" />
+                        {cat.count} Offers Available
+                      </div>
+                      <div className="bg-slate-100 group-hover:bg-blue-600 text-slate-700 group-hover:text-white font-bold text-xs px-4 py-2.5 rounded-xl flex items-center gap-1 transition-all border border-slate-200/50 group-hover:border-blue-600 group-hover:shadow-md group-hover:shadow-blue-500/10">
+                        Explore Now <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>}</div>}</section>}{<section className="py-12 bg-card relative overflow-hidden">{<div className="container mx-auto px-4 md:px-6">{<div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 border-b border-border/80 pb-6">{<div className="space-y-3">{<span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 uppercase tracking-widest border border-amber-100">Live Offers</span>}{<h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground flex items-center gap-3">Today's Deals{<span className="relative flex h-4 w-4">{<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />}{<span className="relative inline-flex rounded-full h-4 w-4 bg-red-500" />}</span>}</h2>}{<p className="text-muted-foreground text-base md:text-lg max-w-2xl leading-relaxed">Time-sensitive discounts and exclusive pricing on premium marketing tools, updated hourly.</p>}</div>}{<Link href="/deals" className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors group/all shrink-0 pb-1">View All Deals {<ArrowRight className="w-5 h-5 transition-transform group-hover/all:translate-x-1" />}</Link>}</div>}{<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{todaysDeals.map((deal, i) => <DealCard deal={deal} index={i} />)}</div>}</div>}</section>}{<section className="py-12 bg-muted/30 border-y border-border">{<div className="container mx-auto px-4 md:px-6">{<div className="flex items-center justify-between mb-6">{<h2 className="text-3xl md:text-4xl font-black">Trending Offers</h2>}</div>}{<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">{[{
               id: "google-ads",
               name: "Google Ads",
               icon: <img src="https://www.vectorlogo.zone/logos/google_ads/google_ads-icon.svg" alt="Google Ads" className="w-full h-full object-contain p-1" />,
@@ -296,7 +341,7 @@ export default function Home() {
               once: true
             }} transition={{
               delay: i * 0.1
-            }} className="group bg-card rounded-2xl border border-border p-6 hover:border-slate-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">{<div className="absolute top-0 left-0 bg-slate-900 text-slate-100 text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-br-lg border-r border-b border-border">{i < 2 ? "Sponsored" : "Featured"}</div>}{<div className="flex gap-4 mt-4 mb-4">{<div className="w-14 h-14 rounded-xl bg-slate-50 border border-slate-200/50 flex items-center justify-center text-2xl font-bold shrink-0 overflow-hidden">{offer.icon}</div>}{<div>{<h3 className="font-bold text-xl group-hover:text-slate-900 transition-colors">{offer.name}</h3>}{<div className="flex items-center gap-1 mt-1">{<Star className="w-4 h-4 fill-secondary text-secondary" />}{<span className="text-sm font-bold">{offer.rating}</span>}{<span className="text-xs text-muted-foreground">({offer.count})</span>}</div>}</div>}</div>}{<p className="text-muted-foreground text-sm mb-6 flex-1">{offer.desc}</p>}{<div className="flex items-center justify-between mt-auto">{<span className="bg-slate-100 text-slate-800 font-extrabold px-3 py-1.5 rounded-lg text-sm border border-slate-200">{offer.badge}</span>}{<Link href={`/deal/${offer.id}`} className="bg-blue-600 text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 group-hover:shadow-md group-hover:shadow-blue-500/25">View Offer {<ArrowRight className="w-4 h-4" />}</Link>}</div>}</motion.div>)}</div>}</div>}</section>}{<section className="py-12 bg-card">{<div className="container mx-auto px-4 md:px-6">{<div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">{<div>{<h2 className="text-3xl md:text-4xl font-black mb-3">Best Affiliate Programs</h2>}{<p className="text-muted-foreground text-lg">Top networks to monetize your audience</p>}</div>}{<Link href="/deals" className="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">View All Programs {<ArrowRight className="w-5 h-5" />}</Link>}</div>}{<div className="space-y-4 max-w-4xl mx-auto">{affiliatePrograms.map((prog, i) => <motion.div initial={{
+            }} className="group bg-card rounded-2xl border border-border p-6 hover:border-slate-400/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full relative overflow-hidden">{<div className="absolute top-0 left-0 bg-slate-900 text-slate-100 text-[10px] font-bold px-3 py-1 uppercase tracking-wider rounded-br-lg border-r border-b border-border">{i < 2 ? "Sponsored" : "Featured"}</div>}{<div className="flex gap-4 mt-4 mb-4">{<div className="w-14 h-14 rounded-xl bg-white border border-slate-200/50 flex items-center justify-center text-2xl font-bold shrink-0 overflow-hidden">{offer.icon}</div>}{<div>{<h3 className="font-bold text-xl group-hover:text-slate-900 transition-colors">{offer.name}</h3>}{<div className="flex items-center gap-1 mt-1">{<Star className="w-4 h-4 fill-secondary text-secondary" />}{<span className="text-sm font-bold">{offer.rating}</span>}{<span className="text-xs text-muted-foreground">({offer.count})</span>}</div>}</div>}</div>}{<p className="text-muted-foreground text-sm mb-6 flex-1">{offer.desc}</p>}{<div className="flex items-center justify-between mt-auto">{<span className="bg-slate-100 text-slate-800 font-extrabold px-3 py-1.5 rounded-lg text-sm border border-slate-200">{offer.badge}</span>}{<Link href={`/deal/${offer.id}`} className="bg-slate-100 group-hover:bg-blue-600 text-slate-700 group-hover:text-white font-bold px-4 py-2 rounded-lg text-sm transition-all border border-slate-200/50 group-hover:border-blue-600 flex items-center gap-2 group-hover:shadow-md group-hover:shadow-blue-500/10">View Offer {<ArrowRight className="w-4 h-4" />}</Link>}</div>}</motion.div>)}</div>}</div>}</section>}{<section className="py-12 bg-card">{<div className="container mx-auto px-4 md:px-6">{<div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">{<div>{<h2 className="text-3xl md:text-4xl font-black mb-3">Best Affiliate Programs</h2>}{<p className="text-muted-foreground text-lg">Top networks to monetize your audience</p>}</div>}{<Link href="/deals" className="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">View All Programs {<ArrowRight className="w-5 h-5" />}</Link>}</div>}{<div className="space-y-4 max-w-4xl mx-auto">{affiliatePrograms.map((prog, i) => <motion.div initial={{
               opacity: 0,
               x: -20
             }} whileInView={{
@@ -476,7 +521,7 @@ export default function Home() {
               once: true
             }} transition={{
               delay: i * 0.05
-            }} onClick={() => setSelectedPlatformDetail(plat)} className="flex flex-col items-center gap-4 p-6 rounded-2xl hover:bg-muted transition-colors cursor-pointer group bg-slate-50 border border-slate-100 shadow-sm">{<div className="w-20 h-20 rounded-full bg-white border border-slate-200/80 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform p-3">{plat.icon}</div>}{<span className="font-bold text-slate-500 group-hover:text-slate-900 transition-colors">{plat.name}</span>}</motion.div>)}</div>}{<button onClick={() => setShowMorePlatforms(!showMorePlatforms)} className="mt-8 text-primary font-bold hover:underline inline-flex items-center gap-2">{showMorePlatforms ? "Show Less Platforms " : "View More Platforms "}{<ArrowRight className={`w-4 h-4 transition-transform ${showMorePlatforms ? "rotate-90" : ""}`} />}</button>}</div>}</section>}{<section className="py-12 bg-muted/30 overflow-hidden">{<div className="container mx-auto px-4 md:px-6 mb-6">{<div className="flex items-center justify-between">{<h2 className="text-3xl md:text-4xl font-black">Top Marketing Tools</h2>}{<Link href="/tools" className="hidden sm:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">See All Tools {<ArrowRight className="w-5 h-5" />}</Link>}</div>}</div>}{<div className="overflow-hidden px-4 md:px-6">{<div className="home-marquee-track flex w-max gap-6 py-2">{[...toolCards, ...toolCards].map((tool, i) => <Link href={`/tools?id=${tool.name.toLowerCase().split(" ")[0]}`} className="min-w-[280px] sm:min-w-[320px] bg-card p-6 rounded-2xl border border-border hover:border-slate-400/50 hover:shadow-lg transition-all shrink-0 cursor-pointer block text-left group">{<div className="flex items-center gap-4 mb-4">{<div className="w-14 h-14 rounded-xl flex items-center justify-center bg-slate-50 border border-slate-200/50 overflow-hidden p-1.5 shrink-0">{tool.icon}</div>}{<div>{<h3 className="font-bold text-xl group-hover:text-primary transition-colors">{tool.name}</h3>}{<span className="text-xs font-semibold text-primary uppercase tracking-wider">{tool.cat}</span>}</div>}</div>}{<div className="flex items-center justify-between">{<div className="flex items-center gap-1.5">{<Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />}{<span className="font-bold">{tool.rating}</span>}{<span className="text-sm text-muted-foreground">({tool.count})</span>}</div>}{<div className="text-primary bg-primary/5 group-hover:bg-primary/20 p-2 rounded-full transition-colors">{<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}</div>}</div>}</Link>)}</div>}</div>}</section>}{<section className="py-12 bg-card border-y border-border">{<div className="container mx-auto px-4 md:px-6">{<div className="flex items-center justify-between mb-6">{<h2 className="text-3xl md:text-4xl font-black">Latest Reviews</h2>}{<Link href="/reviews" className="hidden sm:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">View All Reviews {<ArrowRight className="w-5 h-5" />}</Link>}</div>}{<div className="grid grid-cols-1 md:grid-cols-3 gap-8">{[{
+            }} onClick={() => setSelectedPlatformDetail(plat)} className="flex flex-col items-center gap-4 p-6 rounded-2xl hover:bg-muted transition-colors cursor-pointer group bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800 shadow-sm">{<div className="w-20 h-20 rounded-full bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 shadow-sm flex items-center justify-center group-hover:scale-110 transition-transform p-3">{plat.icon}</div>}{<span className="font-bold text-slate-500 dark:text-slate-450 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">{plat.name}</span>}</motion.div>)}</div>}{<button onClick={() => setShowMorePlatforms(!showMorePlatforms)} className="mt-8 text-primary font-bold hover:underline inline-flex items-center gap-2">{showMorePlatforms ? "Show Less Platforms " : "View More Platforms "}{<ArrowRight className={`w-4 h-4 transition-transform ${showMorePlatforms ? "rotate-90" : ""}`} />}</button>}</div>}</section>}{<section className="py-12 bg-muted/30 overflow-hidden">{<div className="container mx-auto px-4 md:px-6 mb-6">{<div className="flex items-center justify-between">{<h2 className="text-3xl md:text-4xl font-black">Top Marketing Tools</h2>}{<Link href="/tools" className="hidden sm:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">See All Tools {<ArrowRight className="w-5 h-5" />}</Link>}</div>}</div>}{<div className="overflow-hidden px-4 md:px-6">{<div className="home-marquee-track flex w-max gap-6 py-2">{[...toolCards, ...toolCards].map((tool, i) => <Link href={`/tools?id=${tool.name.toLowerCase().split(" ")[0]}`} className="min-w-[280px] sm:min-w-[320px] bg-card p-6 rounded-2xl border border-border hover:border-slate-400/50 hover:shadow-lg transition-all shrink-0 cursor-pointer block text-left group">{<div className="flex items-center gap-4 mb-4">{<div className="w-14 h-14 rounded-xl flex items-center justify-center bg-slate-50 border border-slate-200/50 overflow-hidden p-1.5 shrink-0">{tool.icon}</div>}{<div>{<h3 className="font-bold text-xl group-hover:text-primary transition-colors">{tool.name}</h3>}{<span className="text-xs font-semibold text-primary uppercase tracking-wider">{tool.cat}</span>}</div>}</div>}{<div className="flex items-center justify-between">{<div className="flex items-center gap-1.5">{<Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />}{<span className="font-bold">{tool.rating}</span>}{<span className="text-sm text-muted-foreground">({tool.count})</span>}</div>}{<div className="text-primary bg-primary/5 group-hover:bg-primary/20 p-2 rounded-full transition-colors">{<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}</div>}</div>}</Link>)}</div>}</div>}</section>}{<section className="py-12 bg-card border-y border-border">{<div className="container mx-auto px-4 md:px-6">{<div className="flex items-center justify-between mb-6">{<h2 className="text-3xl md:text-4xl font-black">Latest Reviews</h2>}{<Link href="/reviews" className="hidden sm:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">View All Reviews {<ArrowRight className="w-5 h-5" />}</Link>}</div>}{<div className="grid grid-cols-1 md:grid-cols-3 gap-8">{[{
               title: "Semrush Review",
               quote: "Best SEO toolkit for professionals. Unmatched keyword data.",
               img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&q=80",
@@ -527,7 +572,7 @@ export default function Home() {
             y: 0
           }} viewport={{
             once: true
-          }}>{<div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl"><img src={mailboxIcon} className="w-12 h-12 invert" alt="mailbox" /></div>}{<h2 className="text-4xl md:text-5xl font-black mb-6">Never Miss New Marketing Deals!</h2>}{<p className="text-xl text-white/80 mb-10 leading-relaxed">Subscribe to get the best marketing deals, exclusive tool discounts, and actionable strategies straight to your inbox.</p>}{newsletterSubscribed ? <motion.div initial={{
+          }}>{<h2 className="text-4xl md:text-5xl font-black mb-6">Never Miss New Marketing Deals!</h2>}{<p className="text-xl text-white/80 mb-10 leading-relaxed">Subscribe to get the best marketing deals, exclusive tool discounts, and actionable strategies straight to your inbox.</p>}{newsletterSubscribed ? <motion.div initial={{
               opacity: 0,
               scale: 0.95
             }} animate={{
@@ -538,7 +583,7 @@ export default function Home() {
               if (newsletterEmail) {
                 setNewsletterSubscribed(true);
               }
-            }}>{<div className="relative flex-1">{<Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />}{<input type="email" placeholder="Enter your email address" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)} className="w-full pl-12 pr-4 py-4 rounded-xl text-foreground bg-white outline-none focus:ring-4 focus:ring-primary/50 shadow-lg text-lg" required={true} />}</div>}{<button type="submit" className="bg-white text-blue-700 font-black px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg text-lg whitespace-nowrap">Subscribe Now</button>}</form>}{<p className="text-sm text-white/60">No spam. Unsubscribe anytime.</p>}</motion.div>}</div>}</section>}</main>}{<Footer />}{selectedProgram && <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">{<div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-6 md:p-8 max-w-md w-full relative space-y-6 text-slate-800">{<button onClick={() => setSelectedProgram(null)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-650 hover:scale-110 transition-transform"><img src={closeIcon} className="w-5 h-5" alt="close" /></button>}{<div className="text-center space-y-2">{<div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center p-2 mx-auto mb-2">{<img src={selectedProgram.logo} alt={selectedProgram.name} className="w-full h-full object-contain" />}</div>}{<h3 className="text-2xl font-black text-slate-800">Join {selectedProgram.name}</h3>}{<p className="text-slate-500 text-xs">Submit your channel details below to apply for our verified partnership.</p>}</div>}{appliedPrograms[selectedProgram.name] ? <div className="text-center p-6 bg-emerald-50 border border-emerald-100 rounded-2xl space-y-3">{<span><img src={partyPopperIcon} className="w-8 h-8 inline-block" alt="success" /></span>}{<h4 className="font-bold text-emerald-800">Application Submitted!</h4>}{<p className="text-emerald-700 text-xs leading-relaxed">We've sent a confirmation email to {<strong>{appForm.email}</strong>}. Our affiliate team will review your website channel and approve your request within 24 hours.</p>}</div> : <form onSubmit={e => {
+            }}>{<div className="relative flex-1">{<Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />}{<input type="email" placeholder="Enter your email address" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)} className="w-full pl-12 pr-4 py-4 rounded-xl text-slate-900 bg-white outline-none focus:ring-4 focus:ring-primary/50 shadow-lg text-lg" required={true} />}</div>}{<button type="submit" className="bg-white text-blue-700 font-black px-8 py-4 rounded-xl hover:bg-blue-50 transition-colors shadow-lg text-lg whitespace-nowrap">Subscribe Now</button>}</form>}{<p className="text-sm text-white/60">No spam. Unsubscribe anytime.</p>}</motion.div>}</div>}</section>}</main>}{<Footer />}{selectedProgram && <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">{<div className="bg-white rounded-3xl border border-slate-200 shadow-2xl p-6 md:p-8 max-w-md w-full relative space-y-6 text-slate-800">{<button onClick={() => setSelectedProgram(null)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-650 hover:scale-110 transition-transform"><img src={closeIcon} className="w-5 h-5" alt="close" /></button>}{<div className="text-center space-y-2">{<div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center p-2 mx-auto mb-2">{<img src={selectedProgram.logo} alt={selectedProgram.name} className="w-full h-full object-contain" />}</div>}{<h3 className="text-2xl font-black text-slate-800">Join {selectedProgram.name}</h3>}{<p className="text-slate-500 text-xs">Submit your channel details below to apply for our verified partnership.</p>}</div>}{appliedPrograms[selectedProgram.name] ? <div className="text-center p-6 bg-emerald-50 border border-emerald-100 rounded-2xl space-y-3">{<span><img src={partyPopperIcon} className="w-8 h-8 inline-block" alt="success" /></span>}{<h4 className="font-bold text-emerald-800">Application Submitted!</h4>}{<p className="text-emerald-700 text-xs leading-relaxed">We've sent a confirmation email to {<strong>{appForm.email}</strong>}. Our affiliate team will review your website channel and approve your request within 24 hours.</p>}</div> : <form onSubmit={e => {
           e.preventDefault();
           setSubmittingProgram(true);
           setTimeout(() => {
