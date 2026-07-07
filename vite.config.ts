@@ -16,5 +16,6 @@ export default defineConfig({
     host: true,
   },
 });
-// Trigger redeployment
+// Trigger build after repo public
+
 
