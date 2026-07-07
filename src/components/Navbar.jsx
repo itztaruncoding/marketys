@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Search, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -7,7 +7,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
-  const [searchVal, setSearchVal] = useState("");
+  const [activeHash, setActiveHash] = useState(window.location.hash);
 
   useEffect(() => {
     // Explicitly clean up any left-over dark mode classes from root element
@@ -23,49 +23,269 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash);
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handleHashChange);
+    };
+  }, []);
+
   // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  const handleSearchSubmit = (e) => {
-    if (e.key === "Enter") {
-      setLocation("/deals?search=" + encodeURIComponent(searchVal));
-    }
-  };
-
   const navLinks = [{
     name: "Home",
-    href: "/"
+    href: "/#home"
   }, {
-    name: "Deals",
-    href: "/deals"
+    name: "Service",
+    href: "/services"
   }, {
-    name: "Categories",
-    href: "/categories"
-  }, {
-    name: "Reviews",
-    href: "/reviews"
-  }, {
-    name: "FAQ",
-    href: "/faq"
+    name: "About",
+    href: "/about"
   }, {
     name: "Blog",
     href: "/blog"
+  }, {
+    name: "Contact",
+    href: "/contact"
   }];
 
-  return <motion.header initial={{
-    y: -100
-  }} animate={{
-    y: 0
-  }} className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md border-b border-slate-200 py-3" : "bg-white border-b border-slate-200 py-5"}`}>{<div className="container mx-auto px-4 md:px-6 flex items-center justify-between">{<Link href="/" className="flex items-center gap-2 z-50 relative">{<span className="text-3xl font-black tracking-tight flex items-center gap-3.5">{<svg viewBox="0 0 100 45" className="w-16 h-12 select-none shrink-0">{<defs>{<linearGradient id="logoGlobeGrad" x1="0%" y1="0%" x2="100%" y2="100%">{<stop offset="0%" stopColor="#2563eb" />}{<stop offset="100%" stopColor="#3b82f6" />}</linearGradient>}</defs>}{<circle cx="22" cy="22" r="16" fill="none" stroke="url(#logoGlobeGrad)" strokeWidth="2" />}{<path d="M6 22h32 M22 6v32" stroke="#60a5fa" strokeWidth="0.8" opacity="0.5" />}{<path d="M9 14c5 3 5 13 0 16 M35 14c-5 3-5 13 0 16" stroke="#60a5fa" strokeWidth="0.8" opacity="0.5" fill="none" />}{<path d="M14 9c3 5 13 5 16 0 M14 35c3-5 13-5 16 0" stroke="#60a5fa" strokeWidth="0.8" opacity="0.5" fill="none" />}{<path d="M 32 10 A 18 18 0 0 1 32 34" stroke="#2563eb" strokeWidth="1" fill="none" opacity="0.8" />}{<path d="M 37 6 A 23 23 0 0 1 37 38" stroke="#3b82f6" strokeWidth="1" fill="none" opacity="0.7" />}{<path d="M 42 2 A 28 28 0 0 1 42 42" stroke="#60a5fa" strokeWidth="1" fill="none" opacity="0.5" />}{<circle cx="37.5" cy="15" r="2.2" fill="#2563eb" />}{<path d="M36.7 15h1.6 M37.5 14.2v1.6" stroke="white" strokeWidth="0.5" />}{<circle cx="37.5" cy="29" r="2.2" fill="#10b981" />}{<path d="M36.7 30l1.6-2" stroke="white" strokeWidth="0.5" />}{<circle cx="45" cy="11" r="2.2" fill="#f59e0b" />}{<circle cx="45" cy="33" r="2.2" fill="#ef4444" />}{<circle cx="52" cy="6" r="2.2" fill="#8b5cf6" />}{<circle cx="52" cy="38" r="2.2" fill="#06b6d4" />}</svg>}{<span className="flex items-center">{<span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">Markety</span>}{<span className="text-slate-800">Deals</span>}</span>}</span>}</Link>}{<nav className="hidden md:flex items-center gap-8">{navLinks.map(link => <Link href={link.href} className={`text-sm font-semibold transition-colors hover:text-blue-600 ${location === link.href ? "text-blue-600" : "text-slate-700"}`}>{link.name}</Link>)}</nav>}{<div className="hidden md:flex items-center gap-4">{<div className="relative group">{<Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-blue-600 transition-colors" />}{<input type="search" placeholder="Search tools, deals..." value={searchVal} onChange={e => setSearchVal(e.target.value)} onKeyDown={handleSearchSubmit} className="pl-12 pr-5 py-2.5 rounded-full bg-slate-50 border border-slate-300 focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-500/10 outline-none text-sm w-64 md:w-80 lg:w-[380px] transition-all text-slate-800 placeholder:text-slate-500 font-medium" />}</div>}</div>}{<div className="flex items-center gap-2 md:hidden z-50 relative"><button className="p-2 text-slate-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>{isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}</button></div>}</div>}{<AnimatePresence>{isMobileMenuOpen && <motion.div initial={{
-    opacity: 0,
-    height: 0
-  }} animate={{
-    opacity: 1,
-    height: "100vh"
-  }} exit={{
-    opacity: 0,
-    height: 0
-  }} className="md:hidden fixed inset-0 top-0 bg-white z-40 flex flex-col pt-24 px-6 pb-6">{<div className="relative mb-8">{<Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />}{<input type="search" placeholder="Search tools, deals..." value={searchVal} onChange={e => setSearchVal(e.target.value)} onKeyDown={handleSearchSubmit} className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-100 border border-slate-250 outline-none text-slate-800 placeholder:text-slate-400" />}</div>}{<nav className="flex flex-col gap-6 text-xl font-bold mb-auto">{navLinks.map(link => <Link href={link.href} className="border-b border-slate-100 pb-4 text-slate-700 hover:text-blue-600 transition-colors">{link.name}</Link>)}</nav>}</motion.div>}</AnimatePresence>}</motion.header>;
+  const isLinkActive = (link) => {
+    if (link.href.includes("#")) {
+      const [path, hash] = link.href.split("#");
+      const currentPath = location === "/" ? "" : location;
+      const targetPath = path === "/" ? "" : path;
+      return currentPath === targetPath && activeHash === `#${hash}`;
+    }
+    return location === link.href;
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", date: "", time: "", message: "" });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    const handleOpenModal = () => {
+      setIsModalOpen(true);
+      setIsSubmitted(false);
+    };
+    window.addEventListener("open-booking-modal", handleOpenModal);
+    return () => window.removeEventListener("open-booking-modal", handleOpenModal);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitted(true);
+    setTimeout(() => {
+      // Auto close after 3 seconds
+      setIsModalOpen(false);
+      setIsSubmitted(false);
+      setFormData({ name: "", email: "", date: "", time: "", message: "" });
+    }, 4000);
+  };
+
+  return (
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? "bg-white shadow-md border-b border-slate-200 py-3" : "bg-white border-b border-slate-200 py-5"
+        }`}
+      >
+        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 z-50 relative">
+            <span className="text-3xl font-black tracking-tight flex items-center gap-1.5">
+              <span className="text-3xl font-black tracking-tight text-slate-900">market<span className="text-blue-600">y</span></span>
+            </span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-semibold transition-colors hover:text-blue-600 ${
+                  isLinkActive(link) ? "text-blue-600" : "text-slate-700"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+          <div className="hidden md:flex items-center gap-4">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-5 py-2.5 bg-blue-600 text-white rounded-full font-bold text-sm hover:bg-blue-700 transition-all hover:shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5"
+            >
+              Book a Schedule
+            </button>
+          </div>
+          <div className="flex items-center gap-2 md:hidden z-50 relative">
+            <button className="p-2 text-slate-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "100vh" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden fixed inset-0 top-0 bg-white z-40 flex flex-col pt-24 px-6 pb-6"
+            >
+              <nav className="flex flex-col gap-6 text-xl font-bold mb-auto">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="border-b border-slate-100 pb-4 text-slate-700 hover:text-blue-600 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsModalOpen(true);
+                  }}
+                  className="w-full text-center py-4 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200 mt-8"
+                >
+                  Book a Schedule
+                </button>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+
+      {/* ── SCHEDULE BOOKING MODAL POPUP ── */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            />
+
+            {/* Modal Body */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-lg bg-white rounded-3xl overflow-hidden shadow-2xl z-10 border border-slate-100 p-8"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-6 right-6 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {!isSubmitted ? (
+                <div className="space-y-6 text-left">
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Book a Schedule</h3>
+                    <p className="text-slate-500 text-sm leading-relaxed">
+                      Select your preferred slot and details below. We will send a confirmation link to your email.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-black uppercase text-slate-500 tracking-widest mb-1.5">Your Name</label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        placeholder="John Doe"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-black uppercase text-slate-500 tracking-widest mb-1.5">Email Address</label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="john@example.com"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-black uppercase text-slate-500 tracking-widest mb-1.5">Date</label>
+                        <input
+                          type="date"
+                          required
+                          value={formData.date}
+                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-black uppercase text-slate-500 tracking-widest mb-1.5">Time</label>
+                        <input
+                          type="time"
+                          required
+                          value={formData.time}
+                          onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-black uppercase text-slate-500 tracking-widest mb-1.5">Message / Goals</label>
+                      <textarea
+                        rows="3"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        placeholder="Tell us about your brand or channels..."
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 mt-2"
+                    >
+                      Confirm Schedule
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-12 flex flex-col items-center justify-center text-center space-y-4"
+                >
+                  <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl font-black shadow-lg shadow-blue-100">
+                    ✓
+                  </div>
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Schedule Confirmed!</h3>
+                  <p className="text-slate-550 text-sm leading-relaxed max-w-sm">
+                    Thank you, <span className="font-bold text-slate-900">{formData.name}</span>. We've sent a calendar invitation and confirmation details to <span className="font-bold text-slate-900">{formData.email}</span>.
+                  </p>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }

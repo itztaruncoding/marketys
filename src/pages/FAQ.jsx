@@ -69,8 +69,35 @@ export default function FAQ() {
                 ease: "easeInOut",
                 delay: 0.5
               }} className="absolute bottom-4 right-4 w-[240px] bg-card p-4 rounded-2xl border border-border shadow-lg flex items-center gap-3.5">{<div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 flex items-center justify-center p-2"><img src={lightningIcon} className="w-6 h-6" alt="lightning" /></div>}{<div>{<h4 className="font-black text-slate-800 dark:text-slate-200 text-xs">Instant Copy</h4>}{<p className="text-[10px] text-slate-500 dark:text-slate-450">Click card to save promo code</p>}</div>}</motion.div>}</div>}</div>}</div>}{// Accordion Section
-        <div className="max-w-3xl mx-auto space-y-4">{faqs.map((item, index) => {
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((item, index) => {
             const isOpen = openIndex === index;
-            return <div className={`rounded-2xl border transition-all duration-300 overflow-hidden bg-card ${isOpen ? "border-blue-500/50 shadow-md ring-1 ring-blue-500/10" : "border-border shadow-sm hover:border-slate-400/50 hover:shadow-md"}`}>{<button className="flex w-full items-center justify-between text-left p-6" onClick={() => setOpenIndex(isOpen ? null : index)}>{<span className={`text-lg font-bold transition-colors ${isOpen ? "text-blue-600" : "text-slate-800 dark:text-slate-200"}`}>{item.question}</span>}{<ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? "rotate-180 text-blue-600" : "text-slate-400 dark:text-slate-500"}`} />}</button>}{isOpen && <div className="px-6 pb-6 pt-1 border-t border-border bg-muted/20">{<p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">{item.answer}</p>}</div>}</div>;
-          })}</div>}</div>}</main>}{<Footer />}</div>;
+            return (
+              <div
+                key={index}
+                onMouseEnter={() => setOpenIndex(index)}
+                onMouseLeave={() => setOpenIndex(null)}
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden bg-card ${
+                  isOpen
+                    ? "border-blue-500/50 shadow-md ring-1 ring-blue-500/10"
+                    : "border-border shadow-sm hover:border-slate-400/50 hover:shadow-md"
+                }`}
+              >
+                <button
+                  className="flex w-full items-center justify-between text-left p-6 pointer-events-none"
+                >
+                  <span className={`text-lg font-bold transition-colors ${isOpen ? "text-blue-600" : "text-slate-800 dark:text-slate-200"}`}>
+                    {item.question}
+                  </span>
+                  <ChevronDown className={`w-5 h-5 transition-transform ${isOpen ? "rotate-180 text-blue-600" : "text-slate-400 dark:text-slate-500"}`} />
+                </button>
+                {isOpen && (
+                  <div className="px-6 pb-6 pt-1 border-t border-border bg-muted/20">
+                    <p className="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">{item.answer}</p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>}</div>}</main>}{<Footer />}</div>;
 }
