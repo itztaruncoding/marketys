@@ -170,7 +170,7 @@ export default function Home() {
       <main className="flex-1 pt-12">
 
         {/* ── HERO SECTION ── */}
-        <section id="home" className="relative pt-12 pb-20 lg:pt-16 lg:pb-28 bg-gradient-to-br from-blue-50/50 via-background to-background border-b border-slate-100">
+        <section id="home" className="relative pt-12 pb-8 lg:pt-16 lg:pb-12 bg-gradient-to-br from-blue-50/50 via-background to-background border-b border-slate-100">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 items-center">
 
@@ -181,56 +181,56 @@ export default function Home() {
                 transition={{ duration: 0.6 }}
                 className="lg:col-span-6 space-y-6 text-left"
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.05]">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.05]">
                   Drive growth. <br />
                   <span className="text-blue-600">Scale faster.</span> <br />
                   Win markets.
                 </h1>
 
-                <p className="text-lg md:text-xl text-slate-550 max-w-xl leading-relaxed">
+                <p className="text-xl md:text-2xl text-slate-550 max-w-xl leading-relaxed">
                   Take a data-driven approach to digital marketing. Scale your brand with high-performing campaigns and custom strategies.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                   <button
                     onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
-                    className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-lg transition-all hover:shadow-xl hover:shadow-blue-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-10 py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-xl transition-all hover:shadow-xl hover:shadow-blue-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
                   >
                     Book a Schedule
                   </button>
                   <Link
                     href="/services"
-                    className="w-full sm:w-auto px-8 py-4 bg-white border-2 border-slate-800 hover:border-slate-950 text-slate-850 hover:bg-slate-50 rounded-full font-bold text-lg transition-all flex items-center justify-center"
+                    className="w-full sm:w-auto px-10 py-5 bg-white border-2 border-slate-800 hover:border-slate-950 text-slate-850 hover:bg-slate-50 rounded-full font-bold text-xl transition-all flex items-center justify-center"
                   >
                     Explore Services
                   </Link>
                 </div>
 
                 {/* Rating Strip */}
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-100 w-fit">
+                <div className="flex items-center gap-4 pt-4 border-t border-slate-100 w-fit">
                   <div className="flex gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <p className="text-sm font-semibold text-slate-650">
+                  <p className="text-base font-semibold text-slate-650">
                     <span className="text-slate-900 font-bold">4.8/5</span> (Based on over 1,200+ reviews)
                   </p>
                 </div>
 
                 {/* Hero Stats with count-up animation */}
-                <div className="grid grid-cols-3 gap-6 pt-6 border-t border-slate-100">
+                <div className="grid grid-cols-3 gap-8 pt-8 border-t border-slate-100">
                   <div className="space-y-1">
-                    <p className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight">+<CountUpStat end={48} suffix="%" /></p>
-                    <p className="text-[11px] font-semibold text-slate-500 leading-snug">Average lift in qualified traffic</p>
+                    <p className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight">+<CountUpStat end={48} suffix="%" /></p>
+                    <p className="text-xs font-semibold text-slate-500 leading-snug">Average lift in qualified traffic</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight">+<CountUpStat end={62} suffix="%" /></p>
-                    <p className="text-[11px] font-semibold text-slate-500 leading-snug">Increase in affiliate conversion rate</p>
+                    <p className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight">+<CountUpStat end={62} suffix="%" /></p>
+                    <p className="text-xs font-semibold text-slate-500 leading-snug">Increase in affiliate conversion rate</p>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-3xl md:text-4xl font-black text-slate-950 tracking-tight"><CountUpStat end={3.4} suffix="x" /></p>
-                    <p className="text-[11px] font-semibold text-slate-500 leading-snug">Faster campaign learning cycles</p>
+                    <p className="text-4xl md:text-5xl font-black text-slate-950 tracking-tight"><CountUpStat end={3.4} suffix="x" /></p>
+                    <p className="text-xs font-semibold text-slate-500 leading-snug">Faster campaign learning cycles</p>
                   </div>
                 </div>
               </motion.div>
@@ -251,7 +251,7 @@ export default function Home() {
                     e.currentTarget.muted = true;
                     e.currentTarget.play().catch(err => console.log(err));
                   }}
-                  className="w-full max-w-2xl lg:max-w-3xl h-auto object-contain"
+                  className="w-full max-w-4xl lg:max-w-5xl h-auto object-contain"
                   style={{ display: "block" }}
                 >
                   <source src={heroVideoWebm} type="video/webm" />
@@ -264,7 +264,7 @@ export default function Home() {
         </section>
 
         {/* ── PARTNER LOGOS ── */}
-        <section className="py-12 bg-white border-b border-slate-100 overflow-hidden">
+        <section className="py-8 pt-4 bg-white border-b border-slate-100 overflow-hidden">
           <div className="container mx-auto px-4 md:px-6 text-center space-y-8">
             <p className="text-xs font-black uppercase tracking-widest text-slate-900">
               Trusted by the world's leading marquee brands
@@ -350,36 +350,82 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7 }}
-                className="relative"
-              >
-                <div className="absolute -inset-6 rounded-[3rem] bg-blue-400/20 blur-3xl z-0" />
+              <div className="relative aspect-[4/5] w-full max-w-md lg:max-w-[460px] mx-auto mt-12 md:mt-0">
+                {/* Image 1: Top Left (Vertical Large) */}
                 <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200/60 bg-slate-950 aspect-video z-10"
+                  initial={{ opacity: 0, x: 60, y: 60 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.3 }}
+                  className="absolute left-0 top-0 w-[48%] h-[70%] z-10"
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=85"
-                    alt="Analytics Dashboard"
-                    className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute bottom-4 left-4 right-4 flex gap-3">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2.5 shadow-lg flex-1">
-                      <p className="text-xs text-slate-500 font-semibold">Organic Sessions</p>
-                      <p className="text-lg font-black text-slate-900">68,000 <span className="text-xs text-blue-600 font-bold">↑ +460%</span></p>
+                  <motion.div
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Data Analytics" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Image 2: Right Middle */}
+                <motion.div
+                  initial={{ opacity: 0, x: 80, y: 80 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+                  className="absolute right-0 top-[8%] w-[48%] h-[42%] z-20"
+                >
+                  <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80" alt="Strategy Planning" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Image 3: Bottom Center */}
+                <motion.div
+                  initial={{ opacity: 0, x: 100, y: 100 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.5, type: "spring", bounce: 0.3 }}
+                  className="absolute right-[5%] bottom-[12%] w-[58%] h-[40%] z-30"
+                >
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Marketing Dashboard" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Floating Stats */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  className="absolute -bottom-8 left-0 right-0 flex gap-3 z-40"
+                >
+                  <div className="bg-white rounded-2xl px-5 py-4 shadow-xl flex-1 border border-slate-100">
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Organic Sessions</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-black text-slate-900">68,000</p>
+                      <p className="text-xs text-blue-600 font-bold">↑ 460%</p>
                     </div>
-                    <div className="bg-blue-600 rounded-xl px-4 py-2.5 shadow-lg flex-1 text-white">
-                      <p className="text-xs text-blue-200 font-semibold">Conversion Rate</p>
-                      <p className="text-lg font-black">5.4% <span className="text-xs text-blue-200 font-bold">↑ 4.5x</span></p>
+                  </div>
+                  <div className="bg-blue-600 rounded-2xl px-5 py-4 shadow-xl flex-1 text-white">
+                    <p className="text-[10px] uppercase tracking-widest text-blue-200 font-bold mb-1">Conversion Rate</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-black">5.4%</p>
+                      <p className="text-xs text-blue-200 font-bold">↑ 4.5x</p>
                     </div>
                   </div>
                 </motion.div>
-              </motion.div>
+              </div>
             </div>
 
           </div>
@@ -388,34 +434,80 @@ export default function Home() {
           <div id="affiliate-programs" className="container mx-auto px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7 }}
-                className="relative md:order-first order-last"
-              >
-                <div className="absolute -inset-6 rounded-[3rem] bg-blue-400/15 blur-3xl z-0" />
+              <div className="relative md:order-first order-last aspect-[4/5] w-full max-w-md lg:max-w-[460px] mx-auto mt-12 md:mt-0">
+                {/* Image 1: Top Left (Vertical Large) */}
                 <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200/60 aspect-[4/3] z-10"
+                  initial={{ opacity: 0, x: 60, y: 60 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.3 }}
+                  className="absolute left-0 top-0 w-[48%] h-[70%] z-10"
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=85"
-                    alt="Marketing Team Collaborating"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-3 shadow-lg text-center">
-                    <p className="text-2xl font-black text-slate-900">2,600+</p>
-                    <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wide">Active Partners</p>
+                  <motion.div
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://landingi.com/wp-content/uploads/2024/11/Affiliate-Digital-Marketing-1.webp" alt="Affiliate Digital Marketing" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Image 2: Right Middle */}
+                <motion.div
+                  initial={{ opacity: 0, x: 80, y: 80 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+                  className="absolute right-0 top-[8%] w-[48%] h-[42%] z-20"
+                >
+                  <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://pureresiduals.com/wp-content/uploads/top-Social-Media-Marketing-Affiliate-Programs.jpg" alt="Social Media Marketing Affiliate Programs" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Image 3: Bottom Center */}
+                <motion.div
+                  initial={{ opacity: 0, x: 100, y: 100 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.5, type: "spring", bounce: 0.3 }}
+                  className="absolute right-[5%] bottom-[12%] w-[58%] h-[40%] z-30"
+                >
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://assets-au-01.kc-usercontent.com/df4a25df-7d25-0294-ad5c-62528c8f82da/c234e5ea-d77b-4f6c-b74e-f19bbbf11925/Affiliate%20Marketing.jpg" alt="Affiliate Marketing" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Floating Stats */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  className="absolute -bottom-8 left-0 right-0 flex gap-3 z-40"
+                >
+                  <div className="bg-white rounded-2xl px-5 py-4 shadow-xl flex-1 border border-slate-100">
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Active Partners</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-black text-slate-900">2,600+</p>
+                    </div>
                   </div>
-                  <div className="absolute bottom-4 left-4 bg-blue-600 text-white rounded-xl px-4 py-2.5 shadow-lg">
-                    <p className="text-[10px] text-blue-200 font-semibold uppercase tracking-wide">Avg. CAC Drop</p>
-                    <p className="text-lg font-black">–61.2%</p>
+                  <div className="bg-blue-600 rounded-2xl px-5 py-4 shadow-xl flex-1 text-white">
+                    <p className="text-[10px] uppercase tracking-widest text-blue-200 font-bold mb-1">Avg. CAC Drop</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-black">–61.2%</p>
+                    </div>
                   </div>
                 </motion.div>
-              </motion.div>
+              </div>
 
               <motion.div
                 initial={{ opacity: 0, x: 40 }}
@@ -518,37 +610,80 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.7 }}
-                className="relative"
-              >
-                <div className="absolute -inset-6 rounded-[3rem] bg-blue-400/20 blur-3xl z-0" />
+              <div className="relative aspect-[4/5] w-full max-w-md lg:max-w-[460px] mx-auto mt-12 md:mt-0">
+                {/* Image 1: Top Left (Vertical Large) */}
                 <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-                  className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200/60 aspect-video w-full z-10"
+                  initial={{ opacity: 0, x: 60, y: 60 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.1, type: "spring", bounce: 0.3 }}
+                  className="absolute left-0 top-0 w-[48%] h-[70%] z-10"
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1000&q=90"
-                    alt="Paid Ads Campaign"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 flex gap-3">
-                    <div className="flex-1 bg-blue-600 text-white rounded-xl px-4 py-2.5 text-center shadow-lg">
-                      <p className="text-[9px] text-blue-200 font-semibold uppercase tracking-wide">Blended ROAS</p>
-                      <p className="text-xl font-black">4.8x</p>
+                  <motion.div
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&q=80" alt="Paid Ads Campaign" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Image 2: Right Middle */}
+                <motion.div
+                  initial={{ opacity: 0, x: 80, y: 80 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.3, type: "spring", bounce: 0.3 }}
+                  className="absolute right-0 top-[8%] w-[48%] h-[42%] z-20"
+                >
+                  <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&q=80" alt="Ad Results" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Image 3: Bottom Center */}
+                <motion.div
+                  initial={{ opacity: 0, x: 100, y: 100 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.8, delay: 0.5, type: "spring", bounce: 0.3 }}
+                  className="absolute right-[5%] bottom-[12%] w-[58%] h-[40%] z-30"
+                >
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.2)] border-4 md:border-[8px] border-white bg-slate-100"
+                  >
+                    <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80" alt="Social Media Ads" className="w-full h-full object-cover" />
+                  </motion.div>
+                </motion.div>
+
+                {/* Floating Stats */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  className="absolute -bottom-8 left-0 right-0 flex gap-3 z-40"
+                >
+                  <div className="bg-blue-600 rounded-2xl px-5 py-4 shadow-xl flex-1 text-white">
+                    <p className="text-[10px] uppercase tracking-widest text-blue-200 font-bold mb-1">Blended ROAS</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-black">4.8x</p>
                     </div>
-                    <div className="flex-1 bg-white/90 backdrop-blur-sm text-slate-900 rounded-xl px-4 py-2.5 text-center shadow-lg">
-                      <p className="text-[9px] text-slate-400 font-semibold uppercase tracking-wide">CTR Achieved</p>
-                      <p className="text-xl font-black text-blue-600">4.3%</p>
+                  </div>
+                  <div className="bg-white rounded-2xl px-5 py-4 shadow-xl flex-1 border border-slate-100">
+                    <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">CTR Achieved</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-2xl font-black text-blue-600">4.3%</p>
                     </div>
                   </div>
                 </motion.div>
-              </motion.div>
+              </div>
 
             </div>
           </div>
