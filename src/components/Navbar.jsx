@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [location, setLocation] = useLocation();
   const [activeHash, setActiveHash] = useState(window.location.hash);
@@ -17,11 +19,23 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      const threshold = document.documentElement.scrollHeight * 0.50;
+      
+      if (currentScrollY <= threshold) {
+        setIsHidden(false);
+      } else if (currentScrollY > lastScrollY) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+      
+      setIsScrolled(currentScrollY > 20);
+      setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -95,7 +109,8 @@ export function Navbar() {
     <>
       <motion.header
         initial={{ y: -100 }}
-        animate={{ y: 0 }}
+        animate={{ y: isHidden ? -120 : 0 }}
+        transition={{ type: "tween", duration: 0.3 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md border-b border-slate-200 py-3" : "bg-white border-b border-slate-200 py-5"
           }`}
       >
