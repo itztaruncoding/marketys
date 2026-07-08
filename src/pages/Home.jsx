@@ -171,7 +171,7 @@ export default function Home() {
 
         {/* ── HERO SECTION ── */}
         <section id="home" className="relative pt-12 pb-8 lg:pt-16 lg:pb-12 bg-gradient-to-br from-blue-50/50 via-background to-background border-b border-slate-100">
-          <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="w-full px-6 md:px-10 lg:px-12 relative z-10">
             <div className="grid lg:grid-cols-12 gap-12 items-center">
 
               {/* Left Column Text */}
@@ -265,7 +265,7 @@ export default function Home() {
 
         {/* ── PARTNER LOGOS ── */}
         <section className="py-8 pt-4 bg-white border-b border-slate-100 overflow-hidden">
-          <div className="container mx-auto px-4 md:px-6 text-center space-y-8">
+          <div className="w-full px-6 md:px-10 lg:px-12 text-center space-y-8">
             <p className="text-xs font-black uppercase tracking-widest text-slate-900">
               Trusted by the world's leading marquee brands
             </p>
@@ -286,7 +286,7 @@ export default function Home() {
 
         {/* ── FEATURES SECTION ── */}
         <section id="product" className="py-20 bg-slate-50/50 space-y-28 overflow-hidden">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="w-full px-6 md:px-10 lg:px-12">
 
             {/* Centered Services Section Header */}
             <div className="text-center max-w-3xl mx-auto mb-20 space-y-3">
@@ -431,7 +431,7 @@ export default function Home() {
           </div>
 
           {/* Feature 2: Affiliate Marketing */}
-          <div id="affiliate-programs" className="container mx-auto px-4 md:px-6">
+          <div id="affiliate-programs" className="w-full px-6 md:px-10 lg:px-12">
             <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
               <div className="relative md:order-first order-last aspect-[4/5] w-full max-w-md lg:max-w-[460px] mx-auto mt-12 md:mt-0">
@@ -560,7 +560,7 @@ export default function Home() {
           </div>
 
           {/* Feature 3: Advertising */}
-          <div id="advertising" className="container mx-auto px-4 md:px-6 pt-20 border-t border-slate-150">
+          <div id="advertising" className="w-full px-6 md:px-10 lg:px-12 pt-20 border-t border-slate-150">
             <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
               <motion.div
@@ -696,7 +696,7 @@ export default function Home() {
 
         {/* ── PROCESS SECTION (DARK INTERACTIVE GRAPHIC) ── */}
         <section className="py-24 bg-slate-950 text-white">
-          <div className="container mx-auto px-4 md:px-6 space-y-16">
+          <div className="w-full px-6 md:px-10 lg:px-12 space-y-16">
 
             {/* Centered Process Header */}
             <div className="text-center max-w-4xl mx-auto space-y-5">
@@ -709,7 +709,7 @@ export default function Home() {
             </div>
 
             {/* Split Screen Layout */}
-            <div className="grid lg:grid-cols-12 gap-14 items-center max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-12 gap-14 items-center w-full">
 
               {/* Left Column Step List */}
               <div className="lg:col-span-5 space-y-2">
@@ -793,7 +793,7 @@ export default function Home() {
 
         {/* ── BLOG SECTION ── */}
         <section className="py-24 bg-white border-t border-slate-100 w-full">
-          <div className="w-full px-6 md:px-12 lg:px-16 space-y-12">
+          <div className="w-full px-6 md:px-10 lg:px-12 space-y-12">
 
             {/* Header Row — left heading + right "More blogs" link */}
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 w-full">
@@ -935,7 +935,7 @@ export default function Home() {
 
         {/* ── TESTIMONIALS SECTION ── */}
         <section id="about" className="py-20 bg-slate-50 border-t border-slate-100 overflow-hidden">
-          <div className="container mx-auto px-4 md:px-6 space-y-12">
+          <div className="w-full px-6 md:px-10 lg:px-12 space-y-12">
 
             {/* Centered Header */}
             <div className="text-center space-y-4 max-w-2xl mx-auto">
@@ -1005,8 +1005,8 @@ export default function Home() {
 
         {/* ── BOTTOM CTA SECTION ── */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-5xl mx-auto bg-gradient-to-r from-blue-50 via-blue-100/60 to-indigo-50 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border border-blue-100/50">
+          <div className="w-full px-6 md:px-10 lg:px-12">
+            <div className="w-full bg-gradient-to-r from-blue-50 via-blue-100/60 to-indigo-50 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border border-blue-100/50">
 
               {/* Soft decorative blurs */}
               <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-blue-200/30 rounded-full blur-[80px]" />

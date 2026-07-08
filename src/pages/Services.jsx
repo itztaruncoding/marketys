@@ -494,32 +494,35 @@ export default function Services() {
               <img src={selectedCard.img} alt={selectedCard.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/60 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
-              {/* Back Button */}
-              <div className="absolute top-28 left-6 md:left-12 z-20">
-                <button 
-                  onClick={() => setSelectedCard(null)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-bold border border-white/20 transition-all text-sm shadow-sm"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to Services
-                </button>
-              </div>
-              {/* Hero Content */}
-              <div className="absolute bottom-0 left-0 right-0 z-20 px-6 md:px-12 pb-10 max-w-4xl">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-blue-500/30 text-blue-300 uppercase tracking-widest border border-blue-400/30 mb-4">
-                  {selectedCard.subtitle}
-                </span>
-                <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-3">
-                  {selectedCard.title}
-                </h1>
-                <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl">
-                  {selectedCard.tagline}
-                </p>
+              
+              {/* Aligned Container for absolutely positioned items */}
+              <div className="absolute inset-0 z-20 flex flex-col justify-between pt-28 pb-10">
+                <div className="w-full px-6 md:px-10 lg:px-12 text-left">
+                  <button 
+                    onClick={() => setSelectedCard(null)}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-bold border border-white/20 transition-all text-sm shadow-sm"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    Back to Services
+                  </button>
+                </div>
+                
+                <div className="w-full px-6 md:px-10 lg:px-12 text-left">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold bg-blue-500/30 text-blue-300 uppercase tracking-widest border border-blue-400/30 mb-4">
+                    {selectedCard.subtitle}
+                  </span>
+                  <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-tight mb-3">
+                    {selectedCard.title}
+                  </h1>
+                  <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-2xl">
+                    {selectedCard.tagline}
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* ── MAIN CONTENT ── */}
-            <div className="container mx-auto px-4 md:px-8 max-w-6xl py-14 space-y-14">
+            <div className="w-full px-6 md:px-10 lg:px-12 py-14 space-y-14">
 
               {/* What Is + How We Do It */}
               <div className="grid md:grid-cols-2 gap-10">
@@ -684,7 +687,7 @@ export default function Services() {
           <div className="space-y-20">
             
             {/* ── SPLIT HERO SECTION (Same as Contact/Blog) ── */}
-            <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 px-6 md:px-12 border-b border-slate-800">
+            <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 border-b border-slate-800">
               {/* Background Image (100% Opacity on Right) */}
               <div 
                 className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
@@ -694,7 +697,7 @@ export default function Services() {
               <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/30 to-transparent z-10" />
 
               {/* Left-aligned Content */}
-              <div className="container mx-auto max-w-6xl relative z-20">
+              <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
                 <div className="max-w-2xl text-left space-y-8">
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 uppercase tracking-widest border border-blue-500/30">
                     <Sparkles className="w-3.5 h-3.5 text-blue-400" /> CAPABILITIES DIRECTORY
@@ -722,7 +725,7 @@ export default function Services() {
             </section>
 
             {/* ── 1. DIGITAL MARKETING CHANNELS SECTION ── */}
-            <div id="digital-marketing" className="container mx-auto px-4 md:px-6 max-w-7xl space-y-12 scroll-mt-28">
+            <div id="digital-marketing" className="w-full px-6 md:px-10 lg:px-12 space-y-12 scroll-mt-28">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight text-center leading-tight">
                   Digital Marketing Channels
@@ -765,7 +768,7 @@ export default function Services() {
             </div>
 
             {/* ── 2. AFFILIATE MARKETING PARTNERSHIPS SECTION ── */}
-            <div id="affiliate-marketing" className="container mx-auto px-4 md:px-6 max-w-7xl space-y-12 scroll-mt-28">
+            <div id="affiliate-marketing" className="w-full px-6 md:px-10 lg:px-12 space-y-12 scroll-mt-28">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight text-center leading-tight">
                   Affiliate Marketing Partnerships
@@ -808,7 +811,7 @@ export default function Services() {
             </div>
 
             {/* ── 3. PAID ADVERTISEMENT CHANNELS SECTION ── */}
-            <div id="paid-advertisement" className="container mx-auto px-4 md:px-6 max-w-7xl space-y-12 scroll-mt-28">
+            <div id="paid-advertisement" className="w-full px-6 md:px-10 lg:px-12 space-y-12 scroll-mt-28">
               <div className="text-center space-y-4 max-w-2xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight text-center leading-tight">
                   Paid Advertisement Channels
@@ -855,7 +858,7 @@ export default function Services() {
 
         {/* ── BOTTOM CTA SECTION (SAME AS HOME) ── */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="w-full px-6 md:px-10 lg:px-12">
             <div className="max-w-5xl mx-auto bg-gradient-to-r from-blue-50 via-blue-100/60 to-indigo-50 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border border-blue-100/50">
               
               {/* Soft decorative blurs */}

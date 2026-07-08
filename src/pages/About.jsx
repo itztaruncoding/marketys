@@ -135,7 +135,7 @@ export default function About() {
       
       <main className="flex-1 pb-20">
         {/* ── SPLIT HERO SECTION (Same as Contact) ── */}
-        <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 px-6 md:px-12 border-b border-slate-800">
+        <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 border-b border-slate-800">
           {/* Background Image (100% Opacity on Right) */}
           <div 
             className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
@@ -145,7 +145,7 @@ export default function About() {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/50 to-transparent z-10" />
 
           {/* Left-aligned Content */}
-          <div className="container mx-auto max-w-6xl relative z-20">
+          <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
             <div className="max-w-2xl text-left space-y-8">
               <span className="text-sm font-black uppercase tracking-widest text-white block mb-3">
                 WHO WE ARE
@@ -174,7 +174,7 @@ export default function About() {
         </section>
 
         {/* ── MISSION & VISION ── */}
-        <section className="container mx-auto px-4 md:px-6 py-20 max-w-6xl">
+        <section className="w-full px-6 md:px-10 lg:px-12 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 text-left">
               <span className="text-sm font-black uppercase tracking-widest text-black block mb-3">
@@ -206,7 +206,7 @@ export default function About() {
 
         {/* ── CORE VALUES ── */}
         <section className="bg-white py-20 border-t border-b border-slate-100">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl space-y-12">
+          <div className="w-full px-6 md:px-10 lg:px-12 space-y-12">
             <div className="text-center max-w-2xl mx-auto space-y-3">
               <span className="text-sm font-black uppercase tracking-widest text-black block mb-3">
                 CORE VALUES
@@ -242,7 +242,7 @@ export default function About() {
         </section>
 
         {/* ── FAQ SECTION ── */}
-        <section className="container mx-auto px-4 md:px-6 py-20 max-w-6xl">
+        <section className="w-full px-6 md:px-10 lg:px-12 py-20">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Left side: Heading and Contact Card */}
             <div className="lg:col-span-5 space-y-6 text-left lg:sticky lg:top-24">
@@ -299,7 +299,7 @@ export default function About() {
 
         {/* ── LEADERSHIP TEAM ── */}
         <section className="bg-slate-950 py-20 border-t border-slate-800">
-          <div className="container mx-auto px-4 md:px-6 max-w-6xl space-y-12 text-center">
+          <div className="w-full px-6 md:px-10 lg:px-12 space-y-12 text-center">
             <div className="space-y-3 max-w-2xl mx-auto">
               <span className="text-sm font-black uppercase tracking-widest text-blue-300 block mb-3">
                 LEADERSHIP
@@ -332,7 +332,7 @@ export default function About() {
         </section>
 
         {/* ── WHY CHOOSE US ── */}
-        <section className="container mx-auto px-4 md:px-6 py-20 max-w-6xl">
+        <section className="w-full px-6 md:px-10 lg:px-12 py-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200/50 aspect-[4/3]">
               <img 
@@ -369,7 +369,7 @@ export default function About() {
 
         {/* ── BOTTOM CTA ── */}
         <section className="py-10">
-          <div className="container mx-auto px-4 md:px-6">
+          <div className="w-full px-6 md:px-10 lg:px-12">
             <div className="max-w-5xl mx-auto bg-gradient-to-r from-blue-50 via-blue-100/60 to-indigo-50 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden border border-blue-100/50">
               <div className="absolute top-0 left-0 w-[300px] h-[300px] bg-blue-200/30 rounded-full blur-[80px]" />
               <div className="absolute bottom-0 right-0 w-[250px] h-[250px] bg-indigo-200/20 rounded-full blur-[60px]" />

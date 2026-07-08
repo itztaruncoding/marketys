@@ -21,7 +21,7 @@ export default function Blog() {
       <main className="flex-1 pb-20">
 
         {/* ── SPLIT HERO SECTION (Same as Contact Page) ── */}
-        <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 px-6 md:px-12 border-b border-slate-800">
+        <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 border-b border-slate-800">
           {/* Background Image (100% Opacity on Right) */}
           <div 
             className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
@@ -32,7 +32,7 @@ export default function Blog() {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/50 to-transparent z-10" />
 
           {/* Left-aligned Content */}
-          <div className="container mx-auto max-w-6xl relative z-20">
+          <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
             <div className="max-w-2xl text-left space-y-8">
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 uppercase tracking-widest border border-blue-500/30">
                 <Sparkles className="w-3.5 h-3.5 text-blue-400" /> RESOURCES & NEWS
@@ -68,7 +68,7 @@ export default function Blog() {
         </section>
 
         {/* ── FEATURED POST (Split Hero Card) ── */}
-        <section className="container mx-auto px-4 md:px-6 max-w-6xl pt-16 pb-8">
+        <section className="w-full px-6 md:px-10 lg:px-12 pt-16 pb-8">
           <Link
             href={`/blog/${featuredPost.id}`}
             className="group relative rounded-3xl overflow-hidden flex flex-col lg:flex-row bg-white border border-slate-200 shadow-md hover:shadow-[0_20px_60px_rgba(37,99,235,0.12)] hover:border-blue-400 hover:scale-[1.01] transition-all duration-500"
@@ -114,7 +114,7 @@ export default function Blog() {
         </section>
 
         {/* ── REGULAR BLOG POSTS GRID WITH PREMIUM HOVER ANIMATION ── */}
-        <section className="container mx-auto px-4 md:px-6 max-w-6xl py-8">
+        <section className="w-full px-6 md:px-10 lg:px-12 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularPosts.map((blog, i) => (
               <motion.div

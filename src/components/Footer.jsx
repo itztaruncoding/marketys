@@ -48,7 +48,7 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-slate-900 text-slate-300 pt-20 pb-10">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="w-full px-6 md:px-10 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-14">
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="inline-flex items-center">
