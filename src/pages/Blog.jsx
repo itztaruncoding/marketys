@@ -2,17 +2,20 @@ import { useEffect } from "react";
 import { Link } from "wouter";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { blogs } from "@/data/blogs";
+import { blogs as staticBlogs } from "@/data/blogs";
+import { useBlogs } from "@/services/useBlogs";
 import { Sparkles, ArrowRight, Clock, BookOpen, TrendingUp, PenTool } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Blog() {
+  const { data: blogs } = useBlogs();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const featuredPost = blogs[0];
-  const regularPosts = blogs.slice(1);
+  const allBlogs = blogs || staticBlogs;
+  const featuredPost = allBlogs[0];
+  const regularPosts = allBlogs.slice(1);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
@@ -48,7 +51,7 @@ export default function Blog() {
               {/* Info Cards Inside Hero (Dark Glassmorphism - Same as Contact) */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                 {[
-                  { icon: <BookOpen className="w-5 h-5" />, label: "Expert Articles", value: `${blogs.length}+ Published`, accent: "text-blue-400 bg-blue-500/15 border-blue-500/25" },
+                  { icon: <BookOpen className="w-5 h-5" />, label: "Expert Articles", value: `${allBlogs.length}+ Published`, accent: "text-blue-400 bg-blue-500/15 border-blue-500/25" },
                   { icon: <TrendingUp className="w-5 h-5" />, label: "Growth Strategies", value: "Data-Driven Insights", accent: "text-emerald-400 bg-emerald-500/15 border-emerald-500/25" },
                   { icon: <PenTool className="w-5 h-5" />, label: "Updated Weekly", value: "Fresh Marketing Trends", accent: "text-indigo-400 bg-indigo-500/15 border-indigo-500/25" }
                 ].map((item, i) => (
@@ -70,7 +73,7 @@ export default function Blog() {
         {/* ── FEATURED POST (Split Hero Card) ── */}
         <section className="w-full px-6 md:px-10 lg:px-12 pt-16 pb-8">
           <Link
-            href={`/blog/${featuredPost.id}`}
+            href={`/blog/${featuredPost.slug}`}
             className="group relative rounded-3xl overflow-hidden flex flex-col lg:flex-row bg-white border border-slate-200 shadow-md hover:shadow-[0_20px_60px_rgba(37,99,235,0.12)] hover:border-blue-400 hover:scale-[1.01] transition-all duration-500"
           >
             <div className="w-full lg:w-3/5 h-80 lg:h-[420px] overflow-hidden relative">
@@ -125,7 +128,7 @@ export default function Blog() {
                 transition={{ delay: i * 0.1 }}
               >
                 <Link
-                  href={`/blog/${blog.id}`}
+                  href={`/blog/${blog.slug}`}
                   className="group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm flex flex-col h-full hover:shadow-[0_20px_50px_rgba(37,99,235,0.15)] hover:border-blue-500/80 hover:scale-[1.03] transition-all duration-500 ease-out transform"
                 >
                   {/* Image */}

@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { motion } from "framer-motion";
-import { ArrowRight, Target, Zap, Shield, Users, BarChart2, Globe, Award, CheckCircle2, Sparkles, HelpCircle, ChevronDown, MessageSquare } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
+import { useAbout } from "@/services/useAbout";
+import { useTeam } from "@/services/useTeam";
 
 function CountUpCard({ end, suffix = "", prefix = "", label, color = "text-blue-400" }) {
   const [count, setCount] = useState(0);
@@ -39,94 +40,41 @@ function CountUpCard({ end, suffix = "", prefix = "", label, color = "text-blue-
 
 export default function About() {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   const [openFaq, setOpenFaq] = useState(0);
 
-  const leaders = [
-    {
-      name: "Marcus Vance",
-      role: "CEO & Co-Founder",
-      bio: "Former growth director at Google with 15+ years of digital marketing innovation. Architected revenue engines generating $200M+ in trackable client revenue.",
-      img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
-      linkedin: "#"
-    },
-    {
-      name: "Sarah Sterling",
-      role: "Chief of Growth & Strategy",
-      bio: "Affiliate network scaling specialist who has directed $100M+ in advertising spend across 40+ verticals for Fortune 500 brands.",
-      img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
-      linkedin: "#"
-    },
-    {
-      name: "David Reyes",
-      role: "VP of Paid Media",
-      bio: "Former Meta & Google certified media buyer. Managed $50M+ in annual ad budgets with a blended 4.2x ROAS across all platforms.",
-      img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
-      linkedin: "#"
-    },
-    {
-      name: "Elena Torres",
-      role: "Head of Analytics & Attribution",
-      bio: "Server-side tracking architect specializing in GTM, Conversion APIs, and custom BI dashboards for multi-channel attribution.",
-      img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-      linkedin: "#"
-    }
+  const { data: aboutData } = useAbout();
+  const { data: teamData } = useTeam();
+
+  const leaders = teamData?.length > 0 ? teamData : [
+    { name: "Marcus Vance", role: "CEO & Co-Founder", bio: "Former growth director at Google with 15+ years of digital marketing innovation. Architected revenue engines generating $200M+ in trackable client revenue.", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" },
+    { name: "Sarah Sterling", role: "Chief of Growth & Strategy", bio: "Affiliate network scaling specialist who has directed $100M+ in advertising spend across 40+ verticals for Fortune 500 brands.", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" },
+    { name: "David Reyes", role: "VP of Paid Media", bio: "Former Meta & Google certified media buyer. Managed $50M+ in annual ad budgets with a blended 4.2x ROAS across all platforms.", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" },
+    { name: "Elena Torres", role: "Head of Analytics & Attribution", bio: "Server-side tracking architect specializing in GTM, Conversion APIs, and custom BI dashboards for multi-channel attribution.", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" },
   ];
 
-  const values = [
-    {
-      icon: <Target className="w-6 h-6" />,
-      title: "Data-First Decisions",
-      desc: "Every campaign, creative, and landing page is validated through data. No gut feelings, no guesses—only measurable outcomes.",
-      color: "bg-blue-50 text-blue-600 border-blue-100",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80"
-    },
-    {
-      icon: <Zap className="w-6 h-6" />,
-      title: "Speed of Execution",
-      desc: "We launch campaigns within 48 hours. Our agile sprint model means your growth never waits for approvals or bureaucracy.",
-      color: "bg-amber-50 text-amber-600 border-amber-100",
-      image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=600&q=80"
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Margin Protection",
-      desc: "Profit comes first. We structure every campaign and partnership to protect your blended margins while scaling acquisition.",
-      color: "bg-emerald-50 text-emerald-600 border-emerald-100",
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80"
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Global Scale Infrastructure",
-      desc: "Our technology stack supports multi-currency, multi-language, and multi-region campaigns from a single unified dashboard.",
-      color: "bg-indigo-50 text-indigo-600 border-indigo-100",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80"
-    }
+  const values = aboutData?.values?.length > 0 ? aboutData.values : [
+    { title: "Data-First Decisions", desc: "Every campaign, creative, and landing page is validated through data. No gut feelings, no guesses—only measurable outcomes.", color: "bg-blue-50 text-blue-600 border-blue-100", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" },
+    { title: "Speed of Execution", desc: "We launch campaigns within 48 hours. Our agile sprint model means your growth never waits for approvals or bureaucracy.", color: "bg-amber-50 text-amber-600 border-amber-100", image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?w=600&q=80" },
+    { title: "Margin Protection", desc: "Profit comes first. We structure every campaign and partnership to protect your blended margins while scaling acquisition.", color: "bg-emerald-50 text-emerald-600 border-emerald-100", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80" },
+    { title: "Global Scale Infrastructure", desc: "Our technology stack supports multi-currency, multi-language, and multi-region campaigns from a single unified dashboard.", color: "bg-indigo-50 text-indigo-600 border-indigo-100", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80" },
   ];
 
-  const faqs = [
-    {
-      question: "What makes markety different from traditional agencies?",
-      answer: "Unlike traditional agencies that focus on vanity metrics like impressions or clicks, markety is entirely performance-driven. We integrate deep server-side tracking, build high-converting custom creatives in-house, and align our goals directly with your bottom-line blended margins."
-    },
-    {
-      question: "How does the 48-hour campaign launch work?",
-      answer: "Our agile sprint model is built for speed. Once onboarded, our team executes creative development, copywriting, technical tracking setup, and campaign structure assembly simultaneously, allowing us to push your ads live within 48 hours."
-    },
-    {
-      question: "What is your server-side tracking infrastructure?",
-      answer: "We deploy custom GTM server-side containers and Conversions API (CAPI) integrations to capture up to 99.8% of conversion events, bypassing browser ad-blockers and iOS privacy restrictions for absolute data accuracy."
-    },
-    {
-      question: "Do you require long-term contracts?",
-      answer: "No, we believe in retaining partners through measurable performance and clear profit generation. We structure rolling monthly partnerships so we are constantly earning your business."
-    },
-    {
-      question: "How do we communicate with our dedicated team?",
-      answer: "Every client is set up with a dedicated Slack channel for daily messaging, as well as a weekly strategy review call with full performance breakdowns and roadmap adjustments."
-    }
+  const faqs = aboutData?.faqs?.length > 0 ? aboutData.faqs : [
+    { question: "What makes markety different from traditional agencies?", answer: "Unlike traditional agencies that focus on vanity metrics like impressions or clicks, markety is entirely performance-driven. We integrate deep server-side tracking, build high-converting custom creatives in-house, and align our goals directly with your bottom-line blended margins." },
+    { question: "How does the 48-hour campaign launch work?", answer: "Our agile sprint model is built for speed. Once onboarded, our team executes creative development, copywriting, technical tracking setup, and campaign structure assembly simultaneously, allowing us to push your ads live within 48 hours." },
+    { question: "What is your server-side tracking infrastructure?", answer: "We deploy custom GTM server-side containers and Conversions API (CAPI) integrations to capture up to 99.8% of conversion events, bypassing browser ad-blockers and iOS privacy restrictions for absolute data accuracy." },
+    { question: "Do you require long-term contracts?", answer: "No, we believe in retaining partners through measurable performance and clear profit generation. We structure rolling monthly partnerships so we are constantly earning your business." },
+    { question: "How do we communicate with our dedicated team?", answer: "Every client is set up with a dedicated Slack channel for daily messaging, as well as a weekly strategy review call with full performance breakdowns and roadmap adjustments." },
   ];
 
   return (
@@ -134,38 +82,34 @@ export default function About() {
       <Navbar />
       
       <main className="flex-1 pb-20">
-        {/* ── SPLIT HERO SECTION (Same as Contact) ── */}
+        {/* ── SPLIT HERO SECTION ── */}
         <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 border-b border-slate-800">
-          {/* Background Image (100% Opacity on Right) */}
           <div 
             className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
-            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80')` }}
+            style={{ backgroundImage: `url('${aboutData?.hero?.bgImage || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80"}')` }}
           />
-          {/* Gradient Overlay: Dark left → Transparent right */}
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/50 to-transparent z-10" />
 
-          {/* Left-aligned Content */}
           <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
             <div className="max-w-2xl text-left space-y-8">
               <span className="text-sm font-black uppercase tracking-widest text-white block mb-3">
-                WHO WE ARE
+                {aboutData?.hero?.badge || "WHO WE ARE"}
               </span>
               <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
-                We Build The Engine <br/>
-                <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">For Your Scale</span>
+                {aboutData?.hero?.heading || "We Build The Engine"} <br/>
+                <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">{aboutData?.hero?.highlight || "For Your Scale"}</span>
               </h1>
               <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-xl">
-                markety is a premium performance marketing agency. We combine advanced attribution analytics, creative design, and strategic media buying to programmatically scale brands across every digital channel.
+                {aboutData?.hero?.description || "markety is a premium performance marketing agency. We combine advanced attribution analytics, creative design, and strategic media buying to programmatically scale brands across every digital channel."}
               </p>
 
-              {/* Counting Stats Cards Inside Hero */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                {[
+                {(aboutData?.stats?.length > 0 ? aboutData.stats : [
                   { end: 200, suffix: "+", label: "Enterprise Clients", color: "text-blue-400" },
                   { end: 200, prefix: "$", suffix: "M+", label: "Revenue Generated", color: "text-cyan-400" },
                   { end: 99, suffix: ".8%", label: "Data Accuracy", color: "text-indigo-400" },
                   { end: 6, suffix: "+", label: "Years Operating", color: "text-emerald-400" }
-                ].map((stat, i) => (
+                ]).map((stat, i) => (
                   <CountUpCard key={i} {...stat} />
                 ))}
               </div>
@@ -178,17 +122,17 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 text-left">
               <span className="text-sm font-black uppercase tracking-widest text-black block mb-3">
-                OUR MISSION
+                {aboutData?.mission?.badge || "OUR MISSION"}
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                Eliminate marketing guesswork. Replace it with systems.
+                {aboutData?.mission?.heading || "Eliminate marketing guesswork. Replace it with systems."}
               </h2>
-              <p className="text-slate-500 leading-relaxed text-base">
-                We believe that advertising should not be a gamble. By integrating deep analytics with high-converting creative structures, we turn traffic acquisition into a highly predictable revenue center for our partners. Every dollar spent is tracked, attributed, and optimized in real-time.
-              </p>
-              <p className="text-slate-500 leading-relaxed text-base">
-                Our infrastructure is designed for brands that want to scale beyond six and seven figures in monthly revenue—without sacrificing profit margins. We architect growth systems, not one-off campaigns.
-              </p>
+              {(aboutData?.mission?.paragraphs?.length > 0 ? aboutData.mission.paragraphs : [
+                "We believe that advertising should not be a gamble. By integrating deep analytics with high-converting creative structures, we turn traffic acquisition into a highly predictable revenue center for our partners. Every dollar spent is tracked, attributed, and optimized in real-time.",
+                "Our infrastructure is designed for brands that want to scale beyond six and seven figures in monthly revenue—without sacrificing profit margins. We architect growth systems, not one-off campaigns."
+              ]).map((p, i) => (
+                <p key={i} className="text-slate-500 leading-relaxed text-base">{p}</p>
+              ))}
               <Link href="/services" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-full font-bold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
                 View Our Services <ArrowRight className="w-4 h-4" />
               </Link>
@@ -196,7 +140,7 @@ export default function About() {
 
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200/50 aspect-[4/3]">
               <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" 
+                src={aboutData?.mission?.image || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"} 
                 alt="markety Collaboration" 
                 className="w-full h-full object-cover"
               />
@@ -242,7 +186,7 @@ export default function About() {
         </section>
 
         {/* ── FAQ SECTION ── */}
-        <section className="w-full px-6 md:px-10 lg:px-12 py-20">
+        <section id="faq" className="w-full px-6 md:px-10 lg:px-12 py-20">
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             {/* Left side: Heading and Contact Card */}
             <div className="lg:col-span-5 space-y-6 text-left lg:sticky lg:top-24">
@@ -315,7 +259,7 @@ export default function About() {
                 <div key={i} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-6 flex flex-col items-center text-center space-y-4 hover:border-blue-500/30 hover:bg-white/10 transition-all duration-300">
                   <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-blue-500/30">
                     <img 
-                      src={leader.img} 
+                      src={leader.image || leader.avatar || leader.img} 
                       alt={leader.name} 
                       className="w-full h-full object-cover"
                     />
@@ -336,27 +280,27 @@ export default function About() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border border-slate-200/50 aspect-[4/3]">
               <img 
-                src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80" 
+                src={aboutData?.whyUs?.image || "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80"} 
                 alt="Strategy session" 
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="space-y-6 text-left">
               <span className="text-sm font-black uppercase tracking-widest text-black block mb-3">
-                WHY MARKETY
+                {aboutData?.whyUs?.badge || "WHY MARKETY"}
               </span>
               <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">
-                What Makes Us Different
+                {aboutData?.whyUs?.heading || "What Makes Us Different"}
               </h2>
               <div className="space-y-4">
-                {[
+                {(aboutData?.whyUs?.points?.length > 0 ? aboutData.whyUs.points : [
                   "Full-stack marketing team: strategists, media buyers, designers, and analysts",
                   "Proprietary server-side tracking infrastructure for 99.8% attribution accuracy",
                   "Real-time profitability dashboards showing blended CAC, LTV, and true ROAS",
                   "No long-term contracts—we retain clients through performance, not obligations",
                   "Dedicated Slack channel with your team for same-day communication",
                   "Weekly strategy calls with creative performance breakdowns"
-                ].map((point, i) => (
+                ]).map((point, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                     <p className="text-slate-700 text-sm leading-relaxed">{point}</p>
@@ -375,20 +319,20 @@ export default function About() {
               <div className="absolute bottom-0 right-0 w-[250px] h-[250px] bg-indigo-200/20 rounded-full blur-[60px]" />
               <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                  Ready to Partner With markety?
+                  {aboutData?.cta?.heading || "Ready to Partner With markety?"}
                 </h2>
                 <p className="text-slate-500 text-base md:text-lg leading-relaxed">
-                  Let's evaluate your existing analytics tracking and design a custom campaign architecture built to scale.
+                  {aboutData?.cta?.description || "Let's evaluate your existing analytics tracking and design a custom campaign architecture built to scale."}
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                   <button
                     onClick={() => window.dispatchEvent(new CustomEvent('open-booking-modal'))}
                     className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-full font-bold text-base hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 flex items-center justify-center gap-2"
                   >
-                    Book a Schedule <ArrowRight className="w-4 h-4" />
+                    {aboutData?.cta?.primaryLabel || "Book a Schedule"} <ArrowRight className="w-4 h-4" />
                   </button>
                   <Link href="/services" className="w-full sm:w-auto px-8 py-4 bg-white text-blue-600 border border-slate-200 rounded-full font-bold text-base hover:bg-slate-50 transition-colors shadow-sm text-center">
-                    View Services
+                    {aboutData?.cta?.secondaryLabel || "View Services"}
                   </Link>
                 </div>
               </div>

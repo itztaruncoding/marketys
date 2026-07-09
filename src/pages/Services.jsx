@@ -1,13 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "wouter";
-import { Link } from "wouter";
+import { useLocation, Link } from "wouter";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { motion, AnimatePresence } from "framer-motion";
-import { 
-  ArrowLeft, ArrowRight, Search, BarChart2, Users, Mail, TrendingUp, Award, 
-  CheckCircle2, Sparkles, Clock, Target, Calendar, BarChart, ChevronRight 
-} from "lucide-react";
+import { useServices } from "@/services/useServices";
+import { useServicesPage } from "@/services/useServicesPage";
+import { ArrowLeft, ArrowRight, TrendingUp, Sparkles } from "lucide-react";
 
 function CountUpCard({ end, suffix = "", prefix = "", label, color = "text-blue-400" }) {
   const [count, setCount] = useState(0);
@@ -42,9 +39,13 @@ function CountUpCard({ end, suffix = "", prefix = "", label, color = "text-blue-
 }
 
 export default function Services() {
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
   const [selectedCard, setSelectedCard] = useState(null);
   const [hoveredPoint, setHoveredPoint] = useState(null);
+  const { data: servicesList } = useServices();
+  const { data: pageData } = useServicesPage();
+  const hero = pageData?.hero || {};
+  const heroStats = pageData?.stats || [];
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -65,7 +66,7 @@ export default function Services() {
   }, [selectedCard, location]);
 
   // Expanded Data structure with 6 items per category to look fully complete
-  const servicesData = {
+  const HARDCODED_SERVICES = {
     // ── DIGITAL MARKETING CHANNELS ──
     seo: {
       id: "seo",
@@ -469,12 +470,20 @@ export default function Services() {
     }
   };
 
-  // Group items by category for directory view
+  // Admin data wins: only show services admin saved, use hardcoded as field defaults
+  const servicesData = (() => {
+    if (!servicesList?.length) return HARDCODED_SERVICES;
+    const merged = {};
+    servicesList.forEach(s => {
+      if (s?.id) merged[s.id] = { ...(HARDCODED_SERVICES[s.id] || {}), ...s };
+    });
+    return Object.keys(merged).length > 0 ? merged : HARDCODED_SERVICES;
+  })();
+
   const digitalMarketingChannels = Object.values(servicesData).filter(item => item.category === "digital-marketing");
   const affiliateMarketingPartnerships = Object.values(servicesData).filter(item => item.category === "affiliate-marketing");
   const paidAdvertisementChannels = Object.values(servicesData).filter(item => item.category === "paid-advertisement");
 
-  // Related / Other Services logic (Filter current active, pick up to 3)
   const getOtherServices = (currentId) => {
     return Object.values(servicesData).filter(item => item.id !== currentId).slice(0, 3);
   };
@@ -686,37 +695,33 @@ export default function Services() {
         ) : (
           <div className="space-y-20">
             
-            {/* ── SPLIT HERO SECTION (Same as Contact/Blog) ── */}
+            {/* ── SPLIT HERO SECTION ── */}
             <section className="relative min-h-[520px] flex items-center justify-start overflow-hidden bg-slate-950 pt-28 pb-16 border-b border-slate-800">
-              {/* Background Image (100% Opacity on Right) */}
               <div 
                 className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80')` }}
+                style={{ backgroundImage: `url('${hero.bgImage || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80"}')` }}
               />
-              {/* Gradient Overlay: Dark left → Transparent right */}
               <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/30 to-transparent z-10" />
 
-              {/* Left-aligned Content */}
               <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
                 <div className="max-w-2xl text-left space-y-8">
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 uppercase tracking-widest border border-blue-500/30">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-400" /> CAPABILITIES DIRECTORY
+                    <Sparkles className="w-3.5 h-3.5 text-blue-400" /> {hero.badge || "CAPABILITIES DIRECTORY"}
                   </span>
                   <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
-                    Channels Designed for <br/>
-                    <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Scale & Profit</span>
+                    {hero.title || "Channels Designed for"} <br/>
+                    <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">{hero.highlight || "Scale & Profit"}</span>
                   </h1>
                   <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-xl">
-                    Expand your company's potential. Click on any custom marketing channel card below to examine launch roadmaps, setup briefs, and target circular performance metrics.
+                    {hero.description || "Expand your company's potential. Click on any custom marketing channel card below to examine launch roadmaps, setup briefs, and target circular performance metrics."}
                   </p>
 
-                  {/* Counting Stats Cards Inside Hero */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                    {[
+                    {(heroStats.length > 0 ? heroStats : [
                       { end: 50, prefix: "$", suffix: "M+", label: "Client Spend Managed", color: "text-blue-400" },
                       { end: 3, suffix: ".8x", label: "Average Campaign ROAS", color: "text-cyan-400" },
                       { end: 99, suffix: ".8%", label: "Attribution Accuracy", color: "text-indigo-400" }
-                    ].map((stat, i) => (
+                    ]).map((stat, i) => (
                       <CountUpCard key={i} {...stat} />
                     ))}
                   </div>

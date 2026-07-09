@@ -7,6 +7,7 @@ import {
   ArrowRight, Mail, Phone, MapPin, Clock, Send, CheckCircle2, 
   Sparkles, Globe, MessageSquare, FileText, Check, AlertCircle 
 } from "lucide-react";
+import { createContactSubmission } from "@/lib/firebase-sdk";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ export default function Contact() {
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
 
   useEffect(() => {
@@ -28,9 +30,21 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmittedData({ ...formData });
+    setSubmitError(false);
+    const payload = {
+      ...formData,
+      date: new Date().toISOString().split("T")[0],
+      status: "new",
+      createdAt: new Date().toISOString(),
+    };
+    const result = await createContactSubmission(payload);
+    if (!result) {
+      setSubmitError(true);
+      return;
+    }
+    setSubmittedData(payload);
     setSubmitted(true);
   };
 
@@ -44,6 +58,7 @@ export default function Contact() {
       message: ""
     });
     setSubmitted(false);
+    setSubmitError(false);
     setSubmittedData(null);
   };
 
@@ -110,7 +125,26 @@ export default function Contact() {
               <div className="absolute top-0 left-0 w-2 h-full bg-blue-600" />
               
               <AnimatePresence mode="wait">
-                {!submitted ? (
+                {submitError ? (
+                  <motion.div
+                    key="contact-error"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="space-y-6 text-center py-12"
+                  >
+                    <div className="w-16 h-16 mx-auto bg-red-50 text-red-600 rounded-full flex items-center justify-center text-2xl font-black">
+                      <AlertCircle className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Submission Failed</h3>
+                    <p className="text-slate-500 text-sm max-w-sm mx-auto">
+                      We couldn't save your inquiry. Please check your connection and try again, or email us directly at <strong>growth@velox.agency</strong>.
+                    </p>
+                    <button onClick={() => setSubmitError(false)} className="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors">
+                      Try Again
+                    </button>
+                  </motion.div>
+                ) : !submitted ? (
                   <motion.div
                     key="contact-form"
                     initial={{ opacity: 0, x: -10 }}

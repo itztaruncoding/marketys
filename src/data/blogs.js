@@ -399,3 +399,33 @@ export const blogs = rawBlogs.map((blog, idx) => ({
   image: uniqueImages[idx % uniqueImages.length],
   author: uniqueAuthors[idx % uniqueAuthors.length]
 }));
+
+export function normalizeBlog(blog = {}, index = 0) {
+  return {
+    id: blog.id || blog.slug || `blog-${index}`,
+    title: blog.title || blog.heading || "Untitled",
+    heading: blog.heading || blog.title || "Untitled",
+    slug: blog.slug || blog.id || `blog-${index}`,
+    category: blog.category || "Marketing",
+    excerpt: blog.excerpt || "",
+    content: blog.content || blog.body || [],
+    image: blog.image || uniqueImages[index % uniqueImages.length],
+    imageAlt: blog.imageAlt || "",
+    date: blog.date || blog.createdAt || "",
+    readTime: blog.readTime || `${Math.ceil((blog.content?.length || 0) * 0.5)} min read`,
+    readTimeMinutes: blog.readTimeMinutes || Math.ceil((blog.content?.length || 0) * 0.5),
+    author: typeof blog.author === "string" ? { name: blog.author, avatar: uniqueAuthors[index % uniqueAuthors.length].avatar } : (blog.author || uniqueAuthors[index % uniqueAuthors.length]),
+    tags: blog.tags || [],
+    status: blog.status || "published",
+    createdAt: blog.createdAt || blog.date || "",
+    updatedAt: blog.updatedAt || "",
+  };
+}
+
+export function sortBlogsByDate(posts = []) {
+  return [...posts].sort((a, b) => {
+    const dateA = Date.parse(a.date || a.createdAt || "") || 0;
+    const dateB = Date.parse(b.date || b.createdAt || "") || 0;
+    return dateB - dateA;
+  });
+}

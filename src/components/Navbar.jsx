@@ -2,17 +2,29 @@ import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useHeader } from "@/services/useHeader";
+
+const DEFAULT_LINKS = [
+  { name: "Home", href: "/#home" },
+  { name: "Service", href: "/services" },
+  { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
+];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
   const [activeHash, setActiveHash] = useState(window.location.hash);
 
+  const { data: headerData } = useHeader();
+  const navLinks = headerData?.navLinks?.length > 0 ? headerData.navLinks : DEFAULT_LINKS;
+  const ctaText = headerData?.ctaText || "Book a Schedule";
+
   useEffect(() => {
-    // Explicitly clean up any left-over dark mode classes from root element
     document.documentElement.classList.remove("dark");
     localStorage.removeItem("theme");
   }, []);
@@ -49,27 +61,9 @@ export function Navbar() {
     };
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
-
-  const navLinks = [{
-    name: "Home",
-    href: "/#home"
-  }, {
-    name: "Service",
-    href: "/services"
-  }, {
-    name: "About",
-    href: "/about"
-  }, {
-    name: "Blog",
-    href: "/blog"
-  }, {
-    name: "Contact",
-    href: "/contact"
-  }];
 
   const isLinkActive = (link) => {
     if (link.href.includes("#")) {
@@ -137,7 +131,7 @@ export function Navbar() {
               onClick={() => setIsModalOpen(true)}
               className="px-5 py-2.5 bg-blue-600 text-white rounded-full font-bold text-sm hover:bg-blue-700 transition-all hover:shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5"
             >
-              Book a Schedule
+              {ctaText}
             </button>
           </div>
           <div className="flex items-center gap-2 md:hidden z-50 relative">
@@ -172,7 +166,7 @@ export function Navbar() {
                   }}
                   className="w-full text-center py-4 bg-blue-600 text-white rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-md shadow-blue-200 mt-8"
                 >
-                  Book a Schedule
+                  {ctaText}
                 </button>
               </nav>
             </motion.div>
