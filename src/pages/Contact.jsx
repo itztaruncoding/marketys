@@ -8,8 +8,11 @@ import {
   Sparkles, Globe, MessageSquare, FileText, Check, AlertCircle 
 } from "lucide-react";
 import { createContactSubmission } from "@/lib/firebase-sdk";
+import { useContactPage } from "@/services/useContactPage";
 
 export default function Contact() {
+  const { data: pageData } = useContactPage();
+  const h = pageData?.hero;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,7 +30,11 @@ export default function Contact() {
   }, []);
 
   const handleChange = (e) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    let { name, value } = e.target;
+    if (name === "phone") {
+      value = value.replace(/\D/g, "").slice(0, 10);
+    }
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -73,7 +80,7 @@ export default function Contact() {
           {/* Light Architectural Glass Background Image (100% Opacity on the Right) */}
           <div 
             className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
-            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80')` }}
+            style={{ backgroundImage: `url('${h?.bgImage || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80"}')` }}
           />
 
           {/* Gradient Overlay: Dark slate/black on the left fading to transparent on the right */}
@@ -83,14 +90,14 @@ export default function Contact() {
           <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
             <div className="max-w-2xl text-left space-y-8">
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 uppercase tracking-widest border border-blue-500/30">
-                <MessageSquare className="w-3.5 h-3.5 text-blue-400" /> CLIENT ENGAGEMENT PORTAL
+                <MessageSquare className="w-3.5 h-3.5 text-blue-400" /> {h?.badge || "CLIENT ENGAGEMENT PORTAL"}
               </span>
               <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
-                Let's Start Your <br/>
-                <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Growth Conversation</span>
+{h?.title || "Let's Start Your"} <br/>
+                 <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">{h?.highlight || "Growth Conversation"}</span>
               </h1>
               <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-xl">
-                Schedule a strategy review. Get direct insights on channels, affiliate programs, and margins optimization setup from our expert growth desk.
+                {h?.description || "Schedule a strategy review. Get direct insights on channels, affiliate programs, and margins optimization setup from our expert growth desk."}
               </p>
 
               {/* ── CONTACT INFO CARDS INSIDE HERO (Dark Glassmorphism) ── */}
@@ -196,7 +203,9 @@ export default function Contact() {
                             value={formData.phone}
                             onChange={handleChange}
                             required
-                            placeholder="+91 XXXXX XXXXX"
+                            maxLength={10}
+                            pattern="[0-9]{10}"
+                            placeholder="Enter 10-digit number"
                             className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                           />
                         </div>

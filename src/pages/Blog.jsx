@@ -4,11 +4,13 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { blogs as staticBlogs } from "@/data/blogs";
 import { useBlogs } from "@/services/useBlogs";
+import { useBlogPage } from "@/services/useBlogPage";
 import { Sparkles, ArrowRight, Clock, BookOpen, TrendingUp, PenTool } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Blog() {
   const { data: blogs } = useBlogs();
+  const { data: pageData } = useBlogPage();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -16,6 +18,7 @@ export default function Blog() {
   const allBlogs = blogs || staticBlogs;
   const featuredPost = allBlogs[0];
   const regularPosts = allBlogs.slice(1);
+  const hero = pageData?.hero;
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
@@ -28,7 +31,7 @@ export default function Blog() {
           {/* Background Image (100% Opacity on Right) */}
           <div 
             className="absolute inset-0 bg-cover bg-right md:bg-right-center bg-no-repeat opacity-100 z-0"
-            style={{ backgroundImage: `url('https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1600&q=80')` }}
+            style={{ backgroundImage: `url('${hero?.bgImage || "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=1600&q=80"}')` }}
           />
 
           {/* Gradient Overlay: Dark left → Transparent right */}
@@ -38,14 +41,11 @@ export default function Blog() {
           <div className="w-full px-6 md:px-10 lg:px-12 relative z-20">
             <div className="max-w-2xl text-left space-y-8">
               <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold bg-blue-500/20 text-blue-300 uppercase tracking-widest border border-blue-500/30">
-                <Sparkles className="w-3.5 h-3.5 text-blue-400" /> RESOURCES & NEWS
+                <Sparkles className="w-3.5 h-3.5 text-blue-400" /> {hero?.badge || "RESOURCES & NEWS"}
               </span>
-              <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white">
-                Marketing News & <br/>
-                <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Strategy Guides</span>
-              </h1>
+              <h1 className="text-4xl md:text-6xl font-black tracking-tight leading-tight text-white" dangerouslySetInnerHTML={{ __html: hero?.title || "Marketing News & <br/> <span class=\"text-blue-400 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent\">Strategy Guides</span>" }} />
               <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-xl">
-                Expert advice, software teardowns, and actionable guides to help you scale your business and optimize your marketing stack.
+                {hero?.subtitle || "Expert advice, software teardowns, and actionable guides to help you scale your business and optimize your marketing stack."}
               </p>
 
               {/* Info Cards Inside Hero (Dark Glassmorphism - Same as Contact) */}

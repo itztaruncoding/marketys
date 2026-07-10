@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useHeader } from "@/services/useHeader";
+import { useBookingsPage } from "@/services/useBookingsPage";
+import { createBookingSubmission } from "@/lib/firebase-sdk";
 
 const DEFAULT_LINKS = [
   { name: "Home", href: "/#home" },
@@ -21,8 +23,10 @@ export function Navbar() {
   const [activeHash, setActiveHash] = useState(window.location.hash);
 
   const { data: headerData } = useHeader();
+  const { data: bookingsPageData } = useBookingsPage();
+  const bookingContent = bookingsPageData?.booking;
   const navLinks = headerData?.navLinks?.length > 0 ? headerData.navLinks : DEFAULT_LINKS;
-  const ctaText = headerData?.ctaText || "Book a Schedule";
+  const ctaText = headerData?.ctaText || bookingContent?.ctaText || "Book a Schedule";
 
   useEffect(() => {
     document.documentElement.classList.remove("dark");
@@ -88,11 +92,11 @@ export function Navbar() {
     return () => window.removeEventListener("open-booking-modal", handleOpenModal);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await createBookingSubmission(formData);
     setIsSubmitted(true);
     setTimeout(() => {
-      // Auto close after 3 seconds
       setIsModalOpen(false);
       setIsSubmitted(false);
       setFormData({ name: "", email: "", date: "", time: "", message: "" });
@@ -205,9 +209,9 @@ export function Navbar() {
               {!isSubmitted ? (
                 <div className="space-y-6 text-left">
                   <div className="space-y-2">
-                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Book a Schedule</h3>
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">{bookingContent?.modalTitle || "Book a Schedule"}</h3>
                     <p className="text-slate-500 text-sm leading-relaxed">
-                      Select your preferred slot and details below. We will send a confirmation link to your email.
+                      {bookingContent?.modalDescription || "Select your preferred slot and details below. We will send a confirmation link to your email."}
                     </p>
                   </div>
 
@@ -270,7 +274,7 @@ export function Navbar() {
                       type="submit"
                       className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200 mt-2"
                     >
-                      Confirm Schedule
+                      {bookingContent?.submitText || "Confirm Schedule"}
                     </button>
                   </form>
                 </div>
@@ -283,9 +287,9 @@ export function Navbar() {
                   <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl font-black shadow-lg shadow-blue-100">
                     ✓
                   </div>
-                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">Schedule Confirmed!</h3>
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">{bookingContent?.successTitle || "Schedule Confirmed!"}</h3>
                   <p className="text-slate-550 text-sm leading-relaxed max-w-sm">
-                    Thank you, <span className="font-bold text-slate-900">{formData.name}</span>. We've sent a calendar invitation and confirmation details to <span className="font-bold text-slate-900">{formData.email}</span>.
+                    {bookingContent?.successMessage?.replace("{name}", formData.name).replace("{email}", formData.email) || `Thank you, ${formData.name}. We've sent a calendar invitation and confirmation details to ${formData.email}.`}
                   </p>
                 </motion.div>
               )}
